@@ -17,7 +17,9 @@ public class User {
     private Long id;
 
     private String username;
+    private String password;
+    private String nickname;
 
     @OneToMany(mappedBy = "user")
-    private Set<UserCard> userCards;
+    private Set<UserWord> userCards;
 }
