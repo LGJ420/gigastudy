@@ -2,9 +2,6 @@ package com.example.gigastudy.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Getter
