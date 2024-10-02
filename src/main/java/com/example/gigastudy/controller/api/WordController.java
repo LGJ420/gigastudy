@@ -40,7 +40,7 @@ public class WordController {
         UserWord userWord = userWordRepository.findByUserAndCard(user, word)
                 .orElse(UserWord.builder()
                         .user(user)
-                        .card(word)
+                        .word(word)
                         .flag(true)
                         .build());
 

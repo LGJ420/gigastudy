@@ -21,5 +21,5 @@ public class User {
     private String nickname;
 
     @OneToMany(mappedBy = "user")
-    private Set<UserWord> userCards;
+    private Set<UserWord> userWords;
 }

@@ -20,8 +20,8 @@ public class UserWord {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "card_id")
-    private Word card;
+    @JoinColumn(name = "word_id")
+    private Word word;
 
     private Boolean flag;
 
