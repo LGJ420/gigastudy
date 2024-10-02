@@ -40,17 +40,110 @@
     </header>
 
 
+
+
+
+
+
+
+
     <section>
-
         <h1>한자</h1>
-        <div>
-            意
+        <div id="wordDisplay">
+            <!-- Current word or meaning will be displayed here dynamically -->
         </div>
         <div>
-            모름
+            <button onclick="handleClick()">Next / Meaning</button>
+            <button onclick="iDontKnow()">모름 (I don't know)</button>
         </div>
-
     </section>
+
+
+    <script>
+        let currentIndex = 0;
+        let words = [];
+        let showingMeaning = false;  // Track whether we're showing the meaning or the word
+        let userId = 1; // Placeholder for user ID, could come from session or user login in a real app
+
+        // Fetch all words when the page loads
+        async function loadWords() {
+            try {
+                const response = await fetch('/api/words');
+                words = await response.json();
+                displayWord();
+            } catch (error) {
+                console.error('Error fetching words:', error);
+            }
+        }
+
+        // Display either the word or its meaning
+        function displayWord() {
+            const wordDiv = document.getElementById("wordDisplay");
+            if (currentIndex < words.length) {
+                if (showingMeaning) {
+                    wordDiv.textContent = words[currentIndex].meaning;  // Show the meaning
+                } else {
+                    wordDiv.textContent = words[currentIndex].word;     // Show the word
+                }
+            } else {
+                wordDiv.textContent = "End of words!";
+            }
+        }
+
+        // Handle click event to alternate between word and meaning
+        function handleClick() {
+            if (currentIndex < words.length) {
+                if (showingMeaning) {
+                    // If meaning is being displayed, go to the next word on the next click
+                    showingMeaning = false;
+                    currentIndex++;  // Move to the next word
+                } else {
+                    // If word is being displayed, show the meaning on the next click
+                    showingMeaning = true;
+                }
+                displayWord();
+            }
+        }
+
+        // Handle "모름" (I don't know) button click
+        async function iDontKnow() {
+            if (currentIndex < words.length) {
+                const wordId = words[currentIndex].id;
+                try {
+                    await fetch(`/api/words/${wordId}/flag?userId=${userId}`, { method: 'POST' });
+                    alert('Flag set for this word');
+                } catch (error) {
+                    console.error('Error setting flag:', error);
+                }
+            }
+        }
+
+        // Load words when the window loads
+        window.onload = loadWords;
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

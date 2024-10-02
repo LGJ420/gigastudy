@@ -24,4 +24,9 @@ public class UserWord {
     private Word card;
 
     private Boolean flag;
+
+    public void changeFlag(Boolean flag) {
+
+        this.flag = flag;
+    }
 }
