@@ -24,15 +24,16 @@ public class WordController {
 
 
     @GetMapping
-    public List<Word> getAllWords() {
-        return wordRepository.findAll();
+    public List<Word> getWordsByPart(@RequestParam("type") WordType type) {
+
+        return wordRepository.findByType(type);
     }
 
 
 
     @PostMapping("/{id}/flag")
     public ResponseEntity<String> setFlag(@PathVariable Long id, @RequestParam Long userId) {
-        
+
         Word word = wordRepository.findById(id).orElseThrow(() -> new RuntimeException("Word not found"));
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
 
