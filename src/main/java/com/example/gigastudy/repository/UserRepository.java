@@ -6,4 +6,5 @@ import com.example.gigastudy.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
     
+    boolean existsByUsername(String username);
 }

@@ -4,11 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class CardPageController {
+public class PageController {
     
-    @GetMapping("card")
-    public String getCard() {
-        
-        return "card";
+    @GetMapping("")
+    public String getMain() {
+
+        return "index";
     }
 }

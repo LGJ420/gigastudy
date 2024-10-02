@@ -8,5 +8,6 @@ import com.example.gigastudy.entity.*;
 
 public interface UserWordRepository extends JpaRepository<UserWord, Long>{
     
-    Optional<UserWord> findByUserAndCard(User user, Word card);
+    List<UserWord> findByUserAndWordTypeOrderBySeqAsc(User user, WordType type);
+    Optional<UserWord> findByUserAndWord(User user, Word word);
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Getter
 @Builder
@@ -16,10 +18,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String username;
-    private String password;
-    private String nickname;
 
-    @OneToMany(mappedBy = "user")
-    private Set<UserWord> userWords;
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private String nickname;
 }

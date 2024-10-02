@@ -9,5 +9,4 @@ import com.example.gigastudy.entity.WordType;
 
 public interface WordRepository extends JpaRepository<Word, Long>{
 
-    List<Word> findByType(WordType type);
 }
