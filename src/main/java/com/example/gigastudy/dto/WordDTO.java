@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 public class WordDTO {
     
+    private Long id;
     private String word;
     private String meaning;
 }

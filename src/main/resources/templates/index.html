@@ -63,15 +63,14 @@
         let currentIndex = 0;
         let words = [];
         let showingMeaning = false;
-        let userId = 1;
 
         async function loadWords() {
             try {
-                const response = await fetch('/api/words?type=KANJI');
+                const response = await fetch('/api/userword?type=KANJI');
                 words = await response.json();
                 displayWord();
             } catch (error) {
-                console.error('Error fetching words:', error);
+                console.error('에러발생:', error);
             }
         }
 
@@ -79,12 +78,12 @@
             const wordDiv = document.getElementById("wordDisplay");
             if (currentIndex < words.length) {
                 if (showingMeaning) {
-                    wordDiv.textContent = words[currentIndex].meaning;
+                    wordDiv.textContent = words[currentIndex].wordDTO.meaning;
                 } else {
-                    wordDiv.textContent = words[currentIndex].word;
+                    wordDiv.textContent = words[currentIndex].wordDTO.word;
                 }
             } else {
-                wordDiv.textContent = "End of words!";
+                wordDiv.textContent = "더이상 단어가 없습니다.";
             }
         }
 
@@ -102,12 +101,12 @@
 
         async function iDontKnow() {
             if (currentIndex < words.length) {
-                const wordId = words[currentIndex].id;
+                const wordId = words[currentIndex].wordDTO.id;
                 try {
-                    await fetch(`/api/words/${wordId}/flag?userId=${userId}`, { method: 'POST' });
-                    alert('Flag set for this word');
+                    await fetch(`/api/userword/${wordId}`, { method: 'POST' });
+                    alert('암기장에 저장되었습니다.');
                 } catch (error) {
-                    console.error('Error setting flag:', error);
+                    console.error('에러발생:', error);
                 }
             }
         }

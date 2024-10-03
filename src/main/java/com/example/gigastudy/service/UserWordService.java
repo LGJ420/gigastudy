@@ -36,6 +36,7 @@ public class UserWordService {
         return userWords.stream()
             .map(userWord -> UserWordDTO.builder()
                 .wordDTO(WordDTO.builder()
+                    .id(userWord.getWord().getId())
                     .word(userWord.getWord().getWord())
                     .meaning(userWord.getWord().getMeaning())
                     .build())
