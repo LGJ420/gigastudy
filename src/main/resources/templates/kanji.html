@@ -1,7 +1,7 @@
 <section th:fragment="content">
     <h1 class="p-5 text-3xl">한자</h1>
     <div id="cardContainer">
-        <div id="wordCard" class="card" onclick="handleClick()">
+        <div id="wordCard" class="card" onclick="handleClickNext()">
             <div id="wordDisplay" class="front">
                 <!-- 단어 -->
             </div>
@@ -10,9 +10,17 @@
             </div>
         </div>
     </div>
-    <div class="flex w-full justify-center">
-        <button onclick="handlePrevious()">이전</button>
-        <button onclick="handleClick()">다음</button>
-        <button onclick="iDontKnow()">모름</button>
+    <div class="flex items-center justify-center h-10">
+        <button class="mx-1" onclick="handleClickPre()">이전</button>
+        <button class="mx-1" onclick="handleClickNext()">다음</button>
+        <button class="mx-1" onclick="handleClickSave()">저장</button>
+        <button class="mx-1">섞기</button>
+        <button class="mx-1">추가</button>
     </div>
+    <p class="whitespace-pre">
+단축키
+ENTER : 다음
+BACKSPACE : 이전
+P : 저장
+    </p>
 </section>

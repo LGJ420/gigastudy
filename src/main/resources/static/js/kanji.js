@@ -16,11 +16,11 @@ async function loadWords() {
         if (isAnimating) return; // 애니메이션 중이면 동작 안함
 
         if (event.key === 'Enter') {
-            handleClick();
+            handleClickNext();
         } else if (event.key === 'p') {
-            iDontKnow();
+            handleClickSave();
         } else if (event.key === 'Backspace') {
-            handlePrevious();
+            handleClickPre();
         }
     });
 }
@@ -37,7 +37,7 @@ function displayWord() {
     }
 }
 
-function handleClick() {
+function handleClickNext() {
     const card = document.getElementById("wordCard");
     if (currentIndex < words.length) {
         if (turning) {
@@ -62,7 +62,7 @@ function handleClick() {
     }
 }
 
-function handlePrevious() {
+function handleClickPre() {
     if (currentIndex > 0) {
         currentIndex--;
         turning = false;
@@ -73,7 +73,7 @@ function handlePrevious() {
     }
 }
 
-async function iDontKnow() {
+async function handleClickSave() {
     if (currentIndex < words.length) {
         const wordId = words[currentIndex].wordDTO.id;
         try {
