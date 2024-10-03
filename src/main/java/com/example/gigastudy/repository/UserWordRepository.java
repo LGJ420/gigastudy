@@ -8,6 +8,8 @@ import com.example.gigastudy.entity.*;
 
 public interface UserWordRepository extends JpaRepository<UserWord, Long>{
     
+    List<UserWord> findByUserAndFlagOrderBySeqAsc(User user, Boolean flag);
     List<UserWord> findByUserAndWordTypeOrderBySeqAsc(User user, WordType type);
+    List<UserWord> findByUserAndFlagAndWordTypeOrderBySeqAsc(User user, Boolean flag, WordType type);
     Optional<UserWord> findByUserAndWord(User user, Word word);
 }

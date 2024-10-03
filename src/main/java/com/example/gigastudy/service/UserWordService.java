@@ -25,15 +25,28 @@ public class UserWordService {
 
 
     // 단어 유형별 불러오기
-    public List<UserWordDTO> getWordsByType(Long userId, WordType type){
+    public List<UserWordDTO> getWords(Long userId, Boolean flag, WordType type) {
 
         User user = userRepository.findById(userId)
-            .orElseThrow(()->new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
+            .orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
 
-        List<UserWord> userWords = userWordRepository.findByUserAndWordTypeOrderBySeqAsc(user, type);
+    List<UserWord> userWords;
 
+    if (flag != null && type != null) {
+        // flag와 type 둘 다 있는 경우
+        userWords = userWordRepository.findByUserAndFlagAndWordTypeOrderBySeqAsc(user, flag, type);
+    } else if (flag != null) {
+        // flag만 있는 경우
+        userWords = userWordRepository.findByUserAndFlagOrderBySeqAsc(user, flag);
+    } else if (type != null) {
+        // type만 있는 경우
+        userWords = userWordRepository.findByUserAndWordTypeOrderBySeqAsc(user, type);
+    } else {
+        // 아무 조건도 없는 경우 (필요하면 추가)
+        userWords = userWordRepository.findAll();
+    }
 
-        return userWords.stream()
+    return userWords.stream()
             .map(userWord -> UserWordDTO.builder()
                 .wordDTO(WordDTO.builder()
                     .id(userWord.getWord().getId())
@@ -44,7 +57,7 @@ public class UserWordService {
                 .flag(userWord.getFlag())
                 .build())
             .collect(Collectors.toList());
-    }
+}
 
 
     // 암기장 추가하기

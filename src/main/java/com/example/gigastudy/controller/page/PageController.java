@@ -26,11 +26,20 @@ public class PageController {
     }
 
     @GetMapping("/english")
-    public String EnglishPage(Model model) {
+    public String englishPage(Model model) {
 
         model.addAttribute("contentTemplate", "english");
         model.addAttribute("cssFile", "card.css");
         model.addAttribute("jsFile", "english.js");
+        return "index";
+    }
+
+    @GetMapping("/save")
+    public String savePage(Model model) {
+
+        model.addAttribute("contentTemplate", "save");
+        model.addAttribute("cssFile", "card.css");
+        model.addAttribute("jsFile", "save.js");
         return "index";
     }
 

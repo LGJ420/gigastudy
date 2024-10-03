@@ -15,23 +15,22 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/api/userword")
 public class UserWordController {
-    
-    private final UserWordService userWordService;
 
+    private final UserWordService userWordService;
 
     // 단어 유형별 불러오기
     @GetMapping
-    public ResponseEntity<?> getWordsByType(@RequestParam("type") WordType type) {
+    public ResponseEntity<?> getWords(
+            @RequestParam(value = "flag", required = false) Boolean flag,
+            @RequestParam(value = "type", required = false) WordType type) {
 
         // 현재 유저아이디 1로 고정
         Long userId = 1L;
 
-        List<UserWordDTO> userWordDTOs =  userWordService.getWordsByType(userId, type);
+        List<UserWordDTO> userWordDTOs = userWordService.getWords(userId, flag, type);
 
         return ResponseEntity.ok(userWordDTOs);
     }
-
-
 
     // 암기장 추가하기
     @PostMapping("/{wordId}")
