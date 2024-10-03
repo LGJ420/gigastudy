@@ -26,11 +26,36 @@ async function loadWords() {
 }
 
 function displayWord() {
+
     const wordDiv = document.getElementById("wordDisplay");
     const meaningDiv = document.getElementById("wordMeaning");
+
     if (currentIndex < words.length && currentIndex >= 0) {
-        wordDiv.textContent = words[currentIndex].wordDTO.word;
-        meaningDiv.textContent = words[currentIndex].wordDTO.meaning;
+        const word = words[currentIndex].wordDTO.word;
+        const meaning = words[currentIndex].wordDTO.meaning;
+
+        // 글자 길이에 따라 폰트 크기를 조정
+        if (word.length > 10) {
+            wordDiv.style.fontSize = '2rem';
+        } else if (word.length > 6) {
+            wordDiv.style.fontSize = '3rem';
+        } else if (word.length > 2) {
+            wordDiv.style.fontSize = '5rem';
+        } else {
+            wordDiv.style.fontSize = '10rem';
+        }
+
+        if (meaning.length > 10) {
+            meaningDiv.style.fontSize = '2rem';
+        } else if (meaning.length > 6) {
+            meaningDiv.style.fontSize = '3rem';
+        } else {
+            meaningDiv.style.fontSize = '5rem';
+        }
+
+        wordDiv.textContent = word;
+        meaningDiv.textContent = meaning;
+        
     } else {
         wordDiv.textContent = "더이상 단어가 없습니다.";
         meaningDiv.textContent = "더이상 단어가 없습니다.";

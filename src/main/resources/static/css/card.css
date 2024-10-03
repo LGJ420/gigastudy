@@ -1,10 +1,10 @@
 #cardContainer {
-    perspective: 1000px;
+    perspective: 60rem;
 }
 
 .card {
-    width: 300px;
-    height: 200px;
+    width: 30rem;
+    height: 20rem;
     margin: 0 auto;
     transform-style: preserve-3d;
     transition: transform 0.6s;
@@ -29,12 +29,7 @@
     align-items: center;
 }
 
-.front {
-    font-size: 5em;
-}
-
 .back {
-    font-size: 2em;
     transform: rotateY(-180deg);
 }
 

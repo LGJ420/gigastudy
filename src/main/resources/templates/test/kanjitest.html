@@ -48,17 +48,17 @@
                 </div>
             </div>
             <div class="flex items-center justify-center h-10">
-                <button class="mx-1" onclick="handleClickPre()">이전</button>
-                <button class="mx-1" onclick="handleClickNext()">다음</button>
-                <button class="mx-1" onclick="handleClickSave()">저장</button>
-                <button class="mx-1">섞기</button>
-                <button class="mx-1">추가</button>
+                <button class="mx-3" onclick="handleClickPre()">이전</button>
+                <button class="mx-3" onclick="handleClickNext()">다음</button>
+                <button class="mx-3" onclick="handleClickSave()">저장</button>
+                <button class="mx-3">섞기</button>
+                <button class="mx-3">추가</button>
             </div>
             <p class="whitespace-pre">
-단축키
-ENTER : 다음
-BACKSPACE : 이전
-P : 저장
+                단축키
+                ENTER : 다음
+                BACKSPACE : 이전
+                P : 저장
             </p>
         </section>
 
@@ -68,12 +68,12 @@ P : 저장
 
     <style>
         #cardContainer {
-            perspective: 1000px;
+            perspective: 60rem;
         }
 
         .card {
-            width: 300px;
-            height: 200px;
+            width: 30rem;
+            height: 20rem;
             margin: 0 auto;
             transform-style: preserve-3d;
             transition: transform 0.6s;
@@ -98,12 +98,7 @@ P : 저장
             align-items: center;
         }
 
-        .front {
-            font-size: 5em;
-        }
-
         .back {
-            font-size: 2em;
             transform: rotateY(-180deg);
         }
 
@@ -157,11 +152,36 @@ P : 저장
         }
 
         function displayWord() {
+
             const wordDiv = document.getElementById("wordDisplay");
             const meaningDiv = document.getElementById("wordMeaning");
+
             if (currentIndex < words.length && currentIndex >= 0) {
-                wordDiv.textContent = words[currentIndex].wordDTO.word;
-                meaningDiv.textContent = words[currentIndex].wordDTO.meaning;
+                const word = words[currentIndex].wordDTO.word;
+                const meaning = words[currentIndex].wordDTO.meaning;
+
+                // 글자 길이에 따라 폰트 크기를 조정
+                if (word.length > 10) {
+                    wordDiv.style.fontSize = '2rem';
+                } else if (word.length > 6) {
+                    wordDiv.style.fontSize = '3rem';
+                } else if (word.length > 2) {
+                    wordDiv.style.fontSize = '5rem';
+                } else {
+                    wordDiv.style.fontSize = '10rem';
+                }
+
+                if (meaning.length > 10) {
+                    meaningDiv.style.fontSize = '2rem';
+                } else if (meaning.length > 6) {
+                    meaningDiv.style.fontSize = '3rem';
+                } else {
+                    meaningDiv.style.fontSize = '5rem';
+                }
+
+                wordDiv.textContent = word;
+                meaningDiv.textContent = meaning;
+
             } else {
                 wordDiv.textContent = "더이상 단어가 없습니다.";
                 meaningDiv.textContent = "더이상 단어가 없습니다.";
