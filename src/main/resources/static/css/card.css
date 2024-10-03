@@ -1,0 +1,59 @@
+#cardContainer {
+    perspective: 1000px;
+}
+
+.card {
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.front,
+.back {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.front {
+    font-size: 5em;
+}
+
+.back {
+    font-size: 2em;
+    transform: rotateY(-180deg);
+}
+
+.flipped {
+    transform: rotateY(-180deg);
+}
+
+.fly-off {
+    animation: flyOffAnimation 0.5s forwards;
+}
+
+@keyframes flyOffAnimation {
+    from {
+        transform: rotateY(-180deg) translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: rotateY(-180deg) translateY(-500px);
+        opacity: 0;
+    }
+}

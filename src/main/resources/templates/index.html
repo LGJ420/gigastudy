@@ -1,206 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GIGASTUDY</title>
+    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" th:href="@{/css/} + ${cssFile}">
 </head>
 
-<body>
+<body class="m-auto w-[40rem]">
     <header>
-        <nav>
-            <div>
-                <a href="#">
-                    <img src="/images/logo.png" alt="Logo">
-                    GIGASTUDY
-                </a>
-                <div>
-                    <ul>
-                        <li>
-                            <a href="#">한자</a>
-                        </li>
-                        <li>
-                            <a href="#">영어</a>
-                        </li>
-                        <li>
-                            <a href="#">로그인</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <div th:replace="~{nav :: nav}"></div>
     </header>
 
 
 
+    <!-- 페이지별 콘텐츠가 삽입될 위치 -->
+    <main th:if="${contentTemplate != null and contentTemplate != ''}"
+        class="py-5">
+        <section th:replace="~{${contentTemplate} :: content}"></section>
+    </main>
 
 
 
-    <section>
-        <h1>한자</h1>
-        <div id="cardContainer">
-            <div id="wordCard" class="card" onclick="handleClick()">
-                <div id="wordDisplay" class="front">
-                    <!-- 단어 -->
-                </div>
-                <div id="wordMeaning" class="back">
-                    <!-- 의미 -->
-                </div>
-            </div>
-        </div>
-        <div>
-            <button onclick="handleClick()">다음</button>
-            <button onclick="iDontKnow()">모름</button>
-        </div>
-    </section>
-
-    <style>
-
-        #cardContainer {
-
-            /* 입체적 효과를 주기위한 속성*/
-            perspective: 1000px;
-        }
-
-        .card {
-            width: 300px;
-            height: 200px;
-            margin: 0 auto;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .front,
-        .back {
-            position: absolute;
-            width: 90%;
-            height: 90%;
-            backface-visibility: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .front {
-            font-size: 5em;
-        }
-
-        .back {
-            font-size: 2em;
-            transform: rotateY(-180deg);
-        }
-
-        .flipped {
-            transform: rotateY(-180deg);
-        }
-
-        .fly-off {
-            animation: flyOffAnimation 0.5s forwards;
-        }
-
-        @keyframes flyOffAnimation {
-            from {
-                transform: rotateY(-180deg) translateY(0);
-                opacity: 1;
-            }
-
-            to {
-                transform: rotateY(-180deg) translateY(-500px);
-                opacity: 0;
-            }
-        }
-    </style>
-
-    <script>
-        let currentIndex = 0;
-        let words = [];
-        let showingMeaning = false;
-
-        async function loadWords() {
-            try {
-                const response = await fetch('/api/userword?type=KANJI');
-                words = await response.json();
-                displayWord();
-            } catch (error) {
-                console.error('에러발생:', error);
-            }
-        }
-
-        function displayWord() {
-            const wordDiv = document.getElementById("wordDisplay");
-            const meaningDiv = document.getElementById("wordMeaning");
-            if (currentIndex < words.length) {
-                wordDiv.textContent = words[currentIndex].wordDTO.word;
-                meaningDiv.textContent = words[currentIndex].wordDTO.meaning;
-            } else {
-                wordDiv.textContent = "더이상 단어가 없습니다.";
-                meaningDiv.textContent = "더이상 단어가 없습니다.";
-            }
-        }
-
-        function handleClick() {
-            const card = document.getElementById("wordCard");
-            if (currentIndex < words.length) {
-                if (showingMeaning) {
-                    const wordDiv = document.getElementById("wordDisplay");
-                    wordDiv.textContent = " ";
-                    card.classList.add("fly-off");
-                    card.addEventListener('animationend', () => {
-
-                        currentIndex++;
-                        showingMeaning = false;
-                        card.classList.remove("fly-off");
-                        card.classList.remove("flipped");
-                        displayWord();
-
-                    });
-                } else {
-                    card.classList.add("flipped");
-                    showingMeaning = true;
-                }
-            }
-        }
-
-        async function iDontKnow() {
-            if (currentIndex < words.length) {
-                const wordId = words[currentIndex].wordDTO.id;
-                try {
-                    await fetch(`/api/userword/${wordId}`, { method: 'POST' });
-                    alert('암기장에 저장되었습니다.');
-                } catch (error) {
-                    console.error('에러발생:', error);
-                }
-            }
-        }
-
-        window.onload = loadWords;
-    </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <script th:src="@{/js/} + ${jsFile}"></script>
 </body>
+
 </html>
