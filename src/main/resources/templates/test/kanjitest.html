@@ -13,7 +13,7 @@
         <nav th:fragment="nav">
             <div class="flex items-center justify-between p-3">
                 <a class="flex items-center" href="#">
-                    <img class="w-10 h-10 object-contain" src="../../static/images/logo.png" alt="Logo">
+                    <img class="w-10 h-10 object-contain" src="/images/logo.png" alt="Logo">
                     <div class="px-2">
                         GIGASTUDY
                     </div>
@@ -129,10 +129,11 @@
         let turning = false;
         let isAnimating = false;
 
+        // 사이트 초기화
         async function init() {
             try {
                 // currentIndex 불러오기
-                const indexResponse = await fetch('/api/userindex?flag=true&type=KANJI', {
+                const indexResponse = await fetch('/api/userindex?flag=false&type=KANJI', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
@@ -150,8 +151,12 @@
                 console.error('데이터를 불러오는데 실패하였습니다.', error);
             }
 
+
+            // 단축키 설정
             document.addEventListener('keydown', function (event) {
-                if (isAnimating) return; // 애니메이션 중이면 동작 안함
+
+                // 애니메이션 중이면 단축키 동작 안함
+                if (isAnimating) return;
 
                 if (event.key === 'Enter') {
                     handleClickNext();
@@ -163,6 +168,30 @@
             });
         }
 
+
+        // 인덱스 저장
+        async function saveCurrentIndex() {
+            try {
+                const response = await fetch('/api/userindex', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        flag: false,
+                        type: 'KANJI',
+                        saveIndex: currentIndex
+                    })
+                });
+                console.log('인덱스가 저장되었습니다.');
+            } catch (error) {
+                console.error('인덱스 저장에 실패하였습니다.', error);
+            }
+        }
+
+
+
+        // 단어카드 보여주기
         function displayWord() {
 
             const wordDiv = document.getElementById("wordDisplay");
@@ -200,6 +229,8 @@
             }
         }
 
+
+        // 다음 단어로 가기
         function handleClickNext() {
             const card = document.getElementById("wordCard");
             if (currentIndex < words.length) {
@@ -214,6 +245,7 @@
                         card.classList.remove("fly-off");
                         card.classList.remove("flipped");
                         displayWord();
+                        saveCurrentIndex();
                         isAnimating = false;
                     }, { once: true });
                 } else {
@@ -225,6 +257,8 @@
             }
         }
 
+
+        // 이전 단어로 가기
         function handleClickPre() {
             if (currentIndex > 0) {
                 currentIndex--;
@@ -233,9 +267,12 @@
                 card.classList.remove("flipped");
                 card.classList.remove("fly-off");
                 displayWord();
+                saveCurrentIndex();
             }
         }
 
+
+        // 암기장에 저장하기
         async function handleClickSave() {
             if (currentIndex < words.length) {
                 const wordId = words[currentIndex].wordDTO.id;
