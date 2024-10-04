@@ -1,19 +1,49 @@
+let getFlag, getType;
 let currentIndex = 0;
 let words = [];
 let turning = false;
 let isAnimating = false;
 
-async function loadWords() {
+// 사이트 초기화
+async function init(flag, type) {
     try {
-        const response = await fetch('/api/userword?type=KANJI');
+        getFlag = flag;
+        getType = type;
+        updateLoadingBar(20);
+
+        // currentIndex 불러오기
+        const indexResponse = await fetch(`/api/userindex?flag=${flag}&type=${type}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        currentIndex = await indexResponse.json();
+        updateLoadingBar(70); // 첫번째 요청 완료 후 50%로 설정
+
+        // 단어 리스트 불러오기
+        const response = await fetch(`/api/userword?flag=${flag}&type=${type}`);
         words = await response.json();
+        updateLoadingBar(90); // 두번째 요청 완료 후 80%로 설정
+
         displayWord();
+        updateLoadingBar(100); // 완료 후 100%로 설정
+
+        // 로딩바가 다 채워진 후에만 페이드아웃 시작
+        setTimeout(() => {
+            fadeOutLoadingScreen();
+        }, 1000); // 1초 동안 로딩바가 채워지는 애니메이션 시간과 맞춤
+
     } catch (error) {
         console.error('데이터를 불러오는데 실패하였습니다.', error);
     }
 
+
+    // 단축키 설정
     document.addEventListener('keydown', function (event) {
-        if (isAnimating) return; // 애니메이션 중이면 동작 안함
+
+        // 애니메이션 중이면 단축키 동작 안함
+        if (isAnimating) return;
 
         if (event.key === 'Enter') {
             handleClickNext();
@@ -25,6 +55,51 @@ async function loadWords() {
     });
 }
 
+
+
+// 스크린 페이드아웃
+function fadeOutLoadingScreen() {
+    const loadingBarContainer = document.getElementById("loadingBarContainer");
+    loadingBarContainer.style.opacity = '0'; // 투명하게 설정
+
+    // 페이드아웃 애니메이션이 끝난 후 로딩바를 제거
+    setTimeout(() => {
+        loadingBarContainer.style.display = 'none'; // 완전히 제거
+    }, 500); // 페이드아웃 시간과 맞춤 (0.5초 후에 제거)
+}
+
+
+
+// 로딩바 업데이트
+function updateLoadingBar(percent) {
+    const loadingBar = document.getElementById("loadingBar");
+    loadingBar.style.width = percent + "%";
+}
+
+
+// 인덱스 저장
+async function saveCurrentIndex() {
+    try {
+        const response = await fetch('/api/userindex', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                flag: getFlag,
+                type: getType,
+                saveIndex: currentIndex
+            })
+        });
+        console.log('인덱스가 저장되었습니다.');
+    } catch (error) {
+        console.error('인덱스 저장에 실패하였습니다.', error);
+    }
+}
+
+
+
+// 단어카드 보여주기
 function displayWord() {
 
     const wordDiv = document.getElementById("wordDisplay");
@@ -55,13 +130,16 @@ function displayWord() {
 
         wordDiv.textContent = word;
         meaningDiv.textContent = meaning;
-        
+
     } else {
         wordDiv.textContent = "더이상 단어가 없습니다.";
         meaningDiv.textContent = "더이상 단어가 없습니다.";
     }
 }
 
+
+
+// 다음 단어로 가기
 function handleClickNext() {
     const card = document.getElementById("wordCard");
     if (currentIndex < words.length) {
@@ -76,6 +154,7 @@ function handleClickNext() {
                 card.classList.remove("fly-off");
                 card.classList.remove("flipped");
                 displayWord();
+                saveCurrentIndex();
                 isAnimating = false;
             }, { once: true });
         } else {
@@ -87,6 +166,9 @@ function handleClickNext() {
     }
 }
 
+
+
+// 이전 단어로 가기
 function handleClickPre() {
     if (currentIndex > 0) {
         currentIndex--;
@@ -95,9 +177,13 @@ function handleClickPre() {
         card.classList.remove("flipped");
         card.classList.remove("fly-off");
         displayWord();
+        saveCurrentIndex();
     }
 }
 
+
+
+// 암기장에 저장하기
 async function handleClickSave() {
     if (currentIndex < words.length) {
         const wordId = words[currentIndex].wordDTO.id;
@@ -109,5 +195,3 @@ async function handleClickSave() {
         }
     }
 }
-
-window.onload = loadWords;

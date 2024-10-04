@@ -26,7 +26,7 @@ public class PageController {
     public String kanjiPage(Model model) {
 
         model.addAttribute("contentTemplate", "kanji");
-        model.addAttribute("cssFile", "card.css");
+        model.addAttribute("cssFile", "word.css");
         model.addAttribute("jsFile", "kanji.js");
         return "index";
     }
@@ -35,17 +35,26 @@ public class PageController {
     public String englishPage(Model model) {
 
         model.addAttribute("contentTemplate", "english");
-        model.addAttribute("cssFile", "card.css");
+        model.addAttribute("cssFile", "word.css");
         model.addAttribute("jsFile", "english.js");
         return "index";
     }
 
-    @GetMapping("/save")
-    public String savePage(Model model) {
+    @GetMapping("/kanji/saved")
+    public String kanjiSavedPage(Model model) {
 
-        model.addAttribute("contentTemplate", "save");
-        model.addAttribute("cssFile", "card.css");
-        model.addAttribute("jsFile", "save.js");
+        model.addAttribute("contentTemplate", "kanjiSaved");
+        model.addAttribute("cssFile", "word.css");
+        model.addAttribute("jsFile", "kanjiSaved.js");
+        return "index";
+    }
+
+    @GetMapping("/english/saved")
+    public String EnglishSavedPage(Model model) {
+
+        model.addAttribute("contentTemplate", "englishSaved");
+        model.addAttribute("cssFile", "word.css");
+        model.addAttribute("jsFile", "englishSaved.js");
         return "index";
     }
 
