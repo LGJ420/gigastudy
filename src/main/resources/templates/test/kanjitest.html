@@ -51,9 +51,12 @@
                 </div>
             </div>
             <div class="flex items-center justify-center h-10 py-10">
-                <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30" onclick="handleClickPre()">이전</button>
-                <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30" onclick="handleClickNext()">다음</button>
-                <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30" onclick="handleClickSave()">저장</button>
+                <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30"
+                    onclick="handleClickPre()">이전</button>
+                <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30"
+                    onclick="handleClickNext()">다음</button>
+                <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30"
+                    onclick="handleClickSave()">저장</button>
                 <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30">섞기</button>
                 <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30">추가</button>
             </div>
@@ -126,11 +129,23 @@
         let turning = false;
         let isAnimating = false;
 
-        async function loadWords() {
+        async function init() {
             try {
+                // currentIndex 불러오기
+                const indexResponse = await fetch('/api/userindex?flag=true&type=KANJI', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                currentIndex = await indexResponse.json();
+
+                // 단어 리스트 불러오기
                 const response = await fetch('/api/userword?type=KANJI');
                 words = await response.json();
+
                 displayWord();
+
             } catch (error) {
                 console.error('데이터를 불러오는데 실패하였습니다.', error);
             }
@@ -233,7 +248,7 @@
             }
         }
 
-        window.onload = loadWords;
+        window.onload = init;
 
     </script>
 

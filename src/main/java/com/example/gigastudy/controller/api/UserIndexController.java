@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.gigastudy.dto.UserIndexDTO;
+import com.example.gigastudy.entity.WordType;
 import com.example.gigastudy.service.UserIndexService;
 
 import lombok.RequiredArgsConstructor;
@@ -17,12 +18,14 @@ public class UserIndexController {
 
     // 인덱스 불러오기
     @GetMapping
-    public ResponseEntity<?> getIndex(@RequestBody UserIndexDTO userIndexDTO){
+    public ResponseEntity<?> getIndex(
+            @RequestParam("flag") Boolean flag,
+            @RequestParam("type") WordType type) {
 
         // 현재 유저아이디 1로 고정
         Long userId = 1L;
 
-        Long userIndex = userIndexService.getIndex(userId, userIndexDTO);
+        Long userIndex = userIndexService.getIndex(userId, flag, type);
 
         return ResponseEntity.ok(userIndex);
     }

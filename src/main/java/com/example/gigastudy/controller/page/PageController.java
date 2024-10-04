@@ -16,6 +16,12 @@ public class PageController {
         return "index";
     }
 
+    @GetMapping("/test")
+    public String testPage() {
+
+        return "test/kanjitest";
+    }
+
     @GetMapping("/kanji")
     public String kanjiPage(Model model) {
 

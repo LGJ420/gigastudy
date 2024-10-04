@@ -19,12 +19,12 @@ public class UserIndexService {
     private final UserIndexRepository userIndexRepository;
     private final UserRepository userRepository;
 
-    public Long getIndex(Long userId, UserIndexDTO userIndexDTO) {
+    public Long getIndex(Long userId, Boolean flag, WordType type) {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
 
-        return userIndexRepository.findByUserAndTypeAndFlag(user, userIndexDTO.getType(), userIndexDTO.getFlag())
+        return userIndexRepository.findByUserAndFlagAndType(user, flag, type)
                 .map(UserIndex::getSaveIndex) // 인덱스가 있으면 그 값을 반환
                 .orElse(0L); // 없으면 0을 반환
     }
@@ -34,7 +34,7 @@ public class UserIndexService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
 
-        UserIndex userIndex = userIndexRepository.findByUserAndTypeAndFlag(user, userIndexDTO.getType(), userIndexDTO.getFlag())
+        UserIndex userIndex = userIndexRepository.findByUserAndFlagAndType(user, userIndexDTO.getFlag(), userIndexDTO.getType())
                 .orElse(UserIndex.builder()
                         .user(user)
                         .type(userIndexDTO.getType())
