@@ -28,7 +28,7 @@ public class UserIndexController {
     }
 
     // 인덱스 저장하기
-    @PostMapping("/update")
+    @PostMapping
     public ResponseEntity<?> updateIndex(@RequestBody UserIndexDTO userIndexDTO) {
 
         // 현재 유저아이디 1로 고정

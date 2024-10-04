@@ -24,7 +24,7 @@ public class UserIndexService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
 
-        return userIndexRepository.findByUserAndWordTypeAndFlag(user, userIndexDTO.getType(), userIndexDTO.getFlag())
+        return userIndexRepository.findByUserAndTypeAndFlag(user, userIndexDTO.getType(), userIndexDTO.getFlag())
                 .map(UserIndex::getSaveIndex) // 인덱스가 있으면 그 값을 반환
                 .orElse(0L); // 없으면 0을 반환
     }
@@ -34,7 +34,7 @@ public class UserIndexService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
 
-        UserIndex userIndex = userIndexRepository.findByUserAndWordTypeAndFlag(user, userIndexDTO.getType(), userIndexDTO.getFlag())
+        UserIndex userIndex = userIndexRepository.findByUserAndTypeAndFlag(user, userIndexDTO.getType(), userIndexDTO.getFlag())
                 .orElse(UserIndex.builder()
                         .user(user)
                         .type(userIndexDTO.getType())

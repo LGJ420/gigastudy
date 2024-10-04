@@ -34,13 +34,13 @@ public class UserWordService {
 
     if (flag != null && type != null) {
         // flag와 type 둘 다 있는 경우
-        userWords = userWordRepository.findByUserAndFlagAndWordTypeOrderBySeqAsc(user, flag, type);
+        userWords = userWordRepository.findByUserAndFlagAndWord_TypeOrderBySeqAsc(user, flag, type);
     } else if (flag != null) {
         // flag만 있는 경우
         userWords = userWordRepository.findByUserAndFlagOrderBySeqAsc(user, flag);
     } else if (type != null) {
         // type만 있는 경우
-        userWords = userWordRepository.findByUserAndWordTypeOrderBySeqAsc(user, type);
+        userWords = userWordRepository.findByUserAndWord_TypeOrderBySeqAsc(user, type);
     } else {
         // 아무 조건도 없는 경우 (필요하면 추가)
         userWords = userWordRepository.findAll();
