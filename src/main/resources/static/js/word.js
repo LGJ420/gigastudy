@@ -6,13 +6,25 @@ let isAnimating = false;
 
 // 사이트 초기화
 async function init(flag, type) {
+
+
     try {
-        getFlag = flag;
+
         getType = type;
+
+        if (flag === null) {
+            getFlag = false;
+        } else {
+            getFlag = flag
+        }
+
         updateLoadingBar(20);
 
+
+
+
         // currentIndex 불러오기
-        const indexResponse = await fetch(`/api/userindex?flag=${flag}&type=${type}`, {
+        const indexResponse = await fetch(`/api/userindex?flag=${getFlag}&type=${type}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -21,22 +33,39 @@ async function init(flag, type) {
         currentIndex = await indexResponse.json();
         updateLoadingBar(70); // 첫번째 요청 완료 후 50%로 설정
 
+
+
+
+
         // 단어 리스트 불러오기
-        const response = await fetch(`/api/userword?flag=${flag}&type=${type}`);
+        let wordsUrl = `/api/userword?type=${type}`;
+
+        if (flag !== null) {
+            wordsUrl += `&flag=${flag}`;
+        }
+
+        const response = await fetch(wordsUrl);
         words = await response.json();
         updateLoadingBar(90); // 두번째 요청 완료 후 80%로 설정
+
+
+
+
+
 
         displayWord();
         updateLoadingBar(100); // 완료 후 100%로 설정
 
-        // 로딩바가 다 채워진 후에만 페이드아웃 시작
+        // 1초 동안 로딩바가 채워지는 애니메이션 시간과 맞춤
         setTimeout(() => {
             fadeOutLoadingScreen();
-        }, 1000); // 1초 동안 로딩바가 채워지는 애니메이션 시간과 맞춤
+        }, 1000);
 
     } catch (error) {
         console.error('데이터를 불러오는데 실패하였습니다.', error);
     }
+
+
 
 
     // 단축키 설정
@@ -57,6 +86,8 @@ async function init(flag, type) {
 
 
 
+
+
 // 스크린 페이드아웃
 function fadeOutLoadingScreen() {
     const loadingBarContainer = document.getElementById("loadingBarContainer");
@@ -70,11 +101,14 @@ function fadeOutLoadingScreen() {
 
 
 
+
 // 로딩바 업데이트
 function updateLoadingBar(percent) {
     const loadingBar = document.getElementById("loadingBar");
     loadingBar.style.width = percent + "%";
 }
+
+
 
 
 // 인덱스 저장
@@ -96,6 +130,7 @@ async function saveCurrentIndex() {
         console.error('인덱스 저장에 실패하였습니다.', error);
     }
 }
+
 
 
 
@@ -143,6 +178,7 @@ function displayWord() {
 
 
 
+
 // 다음 단어로 가기
 function handleClickNext() {
     const card = document.getElementById("wordCard");
@@ -172,6 +208,7 @@ function handleClickNext() {
 
 
 
+
 // 이전 단어로 가기
 function handleClickPre() {
     if (currentIndex > 0) {
@@ -184,6 +221,7 @@ function handleClickPre() {
         saveCurrentIndex();
     }
 }
+
 
 
 

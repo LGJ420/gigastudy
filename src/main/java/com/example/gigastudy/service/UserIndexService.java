@@ -19,6 +19,7 @@ public class UserIndexService {
     private final UserIndexRepository userIndexRepository;
     private final UserRepository userRepository;
 
+    // 인덱스 불러오기
     public Long getIndex(Long userId, Boolean flag, WordType type) {
 
         User user = userRepository.findById(userId)
@@ -29,6 +30,7 @@ public class UserIndexService {
                 .orElse(0L); // 없으면 0을 반환
     }
 
+    // 인덱스 저장하기
     public void updateIndex(Long userId, UserIndexDTO userIndexDTO) {
 
         User user = userRepository.findById(userId)

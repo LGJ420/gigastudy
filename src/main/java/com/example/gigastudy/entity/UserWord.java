@@ -9,12 +9,6 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(
-    // 복합제약조건
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"user_id", "seq"})
-    }
-)
 public class UserWord {
 
     @Id
@@ -34,6 +28,11 @@ public class UserWord {
 
     // 암기 유무
     private Boolean flag;
+
+    public void changeSeq(Long seq) {
+
+        this.seq = seq;
+    }
 
     public void changeFlag(Boolean flag) {
 

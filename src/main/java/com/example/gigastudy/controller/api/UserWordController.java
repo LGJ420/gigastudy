@@ -44,4 +44,15 @@ public class UserWordController {
         return ResponseEntity.ok("암기장에 저장되었습니다.");
     }
 
+    // 단어 섞기
+    @PostMapping("/shuffle")
+    public ResponseEntity<?> shuffleWords() {
+
+        // 현재 유저아이디 1로 고정
+        Long userId = 1L;
+
+        userWordService.shuffleWords(userId);
+
+        return ResponseEntity.ok("단어가 성공적으로 섞였습니다.");
+    }
 }
