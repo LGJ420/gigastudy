@@ -171,8 +171,8 @@ function displayWord() {
         wordDiv.style.fontSize = '2rem';
         meaningDiv.style.fontSize = '2rem';
         
-        wordDiv.textContent = "더이상 단어가 없습니다.";
-        meaningDiv.textContent = "더이상 단어가 없습니다.";
+        wordDiv.textContent = "더 이상 단어가 없습니다.";
+        meaningDiv.textContent = "더 이상 단어가 없습니다.";
     }
 }
 
