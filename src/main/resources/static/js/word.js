@@ -18,6 +18,13 @@ async function init(flag, type) {
             getFlag = flag
         }
 
+        // 암기장일때는 삭제버튼 활성화
+        const deleteButton = document.getElementById('deleteButton');
+
+        if (flag === true) {
+            deleteButton.classList.remove('hidden');
+        }
+
         updateLoadingBar(30);
 
 
@@ -242,7 +249,7 @@ function handleClickPre() {
 
 
 
-// 암기장에 저장하기
+// 암기장에 단어 저장하기
 async function handleClickSave() {
     if (currentIndex < words.length) {
         const wordId = words[currentIndex].wordDTO.id;
@@ -251,6 +258,22 @@ async function handleClickSave() {
             showAlert('암기장에 저장되었습니다.')
         } catch (error) {
             console.error('암기장 저장에 실패하였습니다.', error);
+        }
+    }
+}
+
+
+
+
+// 암기장에서 단어 삭제하기
+async function handleClickDelete() {
+    if (currentIndex < words.length) {
+        const wordId = words[currentIndex].wordDTO.id;
+        try {
+            await fetch(`/api/userword/${wordId}`, { method: 'DELETE' });
+            showAlert('암기장에서 삭제되었습니다.')
+        } catch (error) {
+            console.error('암기장 삭제에 실패하였습니다.', error);
         }
     }
 }

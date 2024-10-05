@@ -32,16 +32,28 @@ public class UserWordController {
         return ResponseEntity.ok(userWordDTOs);
     }
 
-    // 암기장 추가하기
+    // 암기장에 단어 저장하기
     @PostMapping("/{wordId}")
-    public ResponseEntity<?> setFlag(@PathVariable Long wordId) {
+    public ResponseEntity<?> saveFlag(@PathVariable Long wordId) {
 
         // 현재 유저아이디 1로 고정
         Long userId = 1L;
 
-        userWordService.setFlag(userId, wordId);
+        userWordService.saveFlag(userId, wordId);
 
-        return ResponseEntity.ok("암기장에 저장되었습니다.");
+        return ResponseEntity.ok("암기장에 단어가 저장되었습니다.");
+    }
+
+    // 암기장에서 단어 삭제하기
+    @DeleteMapping("/{wordId}")
+    public ResponseEntity<?> deleteFlag(@PathVariable Long wordId) {
+
+        // 현재 유저아이디 1로 고정
+        Long userId = 1L;
+
+        userWordService.deleteFlag(userId, wordId);
+
+        return ResponseEntity.ok("암기장에서 단어가 삭제되었습니다.");
     }
 
     // 단어 섞기

@@ -63,8 +63,8 @@ public class UserWordService {
 
 
 
-    // 암기장 추가하기
-    public void setFlag(Long userId, Long wordId) {
+    // 암기장에 단어 저장하기
+    public void saveFlag(Long userId, Long wordId) {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
@@ -82,6 +82,31 @@ public class UserWordService {
 
         // 있으면 변경
         userWord.changeFlag(true);
+        userWordRepository.save(userWord);
+    }
+
+
+
+
+    // 암기장에서 단어 삭제하기
+    public void deleteFlag(Long userId, Long wordId) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
+
+        Word word = wordRepository.findById(wordId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 단어가 존재하지 않습니다."));
+
+        // 없으면 만들어서 새로 추가
+        UserWord userWord = userWordRepository.findByUserAndWord(user, word)
+                .orElse(UserWord.builder()
+                        .user(user)
+                        .word(word)
+                        .flag(false)
+                        .build());
+
+        // 있으면 변경
+        userWord.changeFlag(false);
         userWordRepository.save(userWord);
     }
 

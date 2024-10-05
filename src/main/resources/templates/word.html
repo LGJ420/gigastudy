@@ -1,7 +1,7 @@
 <div th:fragment="wordContent(title)">
 
-    <h1 class="p-5 text-3xl" th:text="${title}"></h1>
-    <div id="cardContainer">
+    <h1 class="p-5 text-3xl select-none" th:text="${title}"></h1>
+    <div id="cardContainer" class="select-none">
         <div id="wordCard" class="card" onclick="handleClickNext()">
             <div id="wordDisplay" class="front">
                 <!-- 단어 -->
@@ -12,15 +12,17 @@
         </div>
     </div>
     <div class="flex items-center justify-center h-10 py-10">
-        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30"
+        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 select-none hover:opacity-30"
             onclick="handleClickPre()">이전</button>
-        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30"
+        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 select-none hover:opacity-30"
             onclick="handleClickNext()">다음</button>
-        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30"
+        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 select-none hover:opacity-30"
             onclick="handleClickSave()">저장</button>
-        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30"
+        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 select-none hover:opacity-30 hidden"
+            onclick="handleClickDelete()" id="deleteButton">삭제</button>
+        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 select-none hover:opacity-30"
             onclick="showConfirm('지금까지 학습한 내용이 모두 초기화됩니다.<br>정말로 섞으시겠습니까?', handleClickShuffle, null)">섞기</button>
-        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30"
+        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 select-none hover:opacity-30"
             onclick="test()">추가</button>
     </div>
 
