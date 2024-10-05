@@ -1,0 +1,707 @@
+/**
+링크로 불러와서 사용하는 방식이다
+링크로 불러오면 약간의 시간이 걸리기 때문에 사용할 때 참고바람
+
+사용법
+<head>안에 다음과 같이 붙여넣어준다
+
+  <!-- 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css">
+  <!-- 한국어 -->
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle:wght@300;400;700&family=Gamja+Flower&family=Gowun+Dodum&family=Hi+Melody&family=Jua&family=Nanum+Gothic+Coding:wght@400;700&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&display=block" rel="stylesheet">
+  <!-- 일본어 -->
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&family=BIZ+UDMincho:wght@400;700&family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@400;700&family=Hina+Mincho&family=IBM+Plex+Sans+JP:wght@100;200;300;400;500;600;700&family=Kiwi+Maru:wght@300;400;500&family=Klee+One:wght@400;600&family=Kosugi&family=Kosugi+Maru&family=M+PLUS+1+Code:wght@100..700&family=M+PLUS+1:wght@100..900&family=M+PLUS+1p:wght@100;300;400;500;700;800;900&family=M+PLUS+2:wght@100..900&family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Mochiy+Pop+One&family=Mochiy+Pop+P+One&family=Murecho:wght@100..900&family=Noto+Sans+JP&family=Noto+Serif+JP:wght@200..900&family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Shippori+Mincho:wght@400;500;600;700;800&family=Yuji+Syuku&family=Zen+Antique&family=Zen+Antique+Soft&family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700;900&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&family=Zen+Kurenaido&family=Zen+Maru+Gothic:wght@300;400;500;700;900&family=Zen+Old+Mincho:wght@400;500;600;700;900&display=block" rel="stylesheet">
+  <!-- 영어 -->
+  <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Itim&family=Lora:ital,wght@0,400..700;1,400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=block" rel="stylesheet">
+
+뒤에
+&display=block는 폰트가 로딩될때만 보여줌
+&display=swap은 폰트가 로딩되는동안 시스템폰트를 보여줌
+*/
+
+
+/* 한국어 */
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle:wght@300;400;700&family=Gamja+Flower&family=Gowun+Dodum&family=Hi+Melody&family=Jua&family=Nanum+Gothic+Coding:wght@400;700&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@100..900&display=block');
+
+.noto-sans-kr-uniquifier {
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nanum-gothic-coding-regular {
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nanum-gothic-coding-bold {
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.do-hyeon-regular {
+  font-family: "Do Hyeon", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.jua-regular {
+  font-family: "Jua", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dongle-light {
+  font-family: "Dongle", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.dongle-regular {
+  font-family: "Dongle", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dongle-bold {
+  font-family: "Dongle", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.gowun-dodum-regular {
+  font-family: "Gowun Dodum", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.hi-melody-regular {
+  font-family: "Hi Melody", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.gamja-flower-regular {
+  font-family: "Gamja Flower", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nanum-pen-script-regular {
+  font-family: "Nanum Pen Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 일본어 */
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDGothic:wght@400;700&family=BIZ+UDMincho:wght@400;700&family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@400;700&family=Hina+Mincho&family=IBM+Plex+Sans+JP:wght@100;200;300;400;500;600;700&family=Kiwi+Maru:wght@300;400;500&family=Klee+One:wght@400;600&family=Kosugi&family=Kosugi+Maru&family=M+PLUS+1+Code:wght@100..700&family=M+PLUS+1:wght@100..900&family=M+PLUS+1p:wght@100;300;400;500;700;800;900&family=M+PLUS+2:wght@100..900&family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&family=Mochiy+Pop+One&family=Mochiy+Pop+P+One&family=Murecho:wght@100..900&family=Noto+Sans+JP&family=Noto+Serif+JP:wght@200..900&family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Shippori+Mincho:wght@400;500;600;700;800&family=Yuji+Syuku&family=Zen+Antique&family=Zen+Antique+Soft&family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700;900&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&family=Zen+Kurenaido&family=Zen+Maru+Gothic:wght@300;400;500;700;900&family=Zen+Old+Mincho:wght@400;500;600;700;900&display=block');
+
+.noto-sans-jp-uniquifier {
+  font-family: "Noto Sans JP", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.noto-serif-jp-uniquifier {
+  font-family: "Noto Serif JP", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 적용 잘 안됨 */
+.m-plus-rounded-1c-thin {
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.m-plus-rounded-1c-light {
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.m-plus-rounded-1c-regular {
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.m-plus-rounded-1c-medium {
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.m-plus-rounded-1c-bold {
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.m-plus-rounded-1c-extrabold {
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.m-plus-rounded-1c-black {
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.m-plus-1p-thin {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.m-plus-1p-light {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.m-plus-1p-regular {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.m-plus-1p-medium {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.m-plus-1p-bold {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.m-plus-1p-extrabold {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.m-plus-1p-black {
+  font-family: "M PLUS 1p", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-new-light {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-new-regular {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-new-medium {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-new-bold {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-new-black {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.zen-maru-gothic-light {
+  font-family: "Zen Maru Gothic", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.zen-maru-gothic-regular {
+  font-family: "Zen Maru Gothic", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.zen-maru-gothic-medium {
+  font-family: "Zen Maru Gothic", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.zen-maru-gothic-bold {
+  font-family: "Zen Maru Gothic", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.zen-maru-gothic-black {
+  font-family: "Zen Maru Gothic", serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.kosugi-maru-regular {
+  font-family: "Kosugi Maru", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 일본어 - 만족스러움 */
+.shippori-mincho-regular {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.shippori-mincho-medium {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.shippori-mincho-semibold {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.shippori-mincho-bold {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.shippori-mincho-extrabold {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.biz-udpgothic-regular {
+  font-family: "BIZ UDPGothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.biz-udpgothic-bold {
+  font-family: "BIZ UDPGothic", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* 일본어 - 만족스러움 */
+.zen-old-mincho-regular {
+  font-family: "Zen Old Mincho", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.zen-old-mincho-medium {
+  font-family: "Zen Old Mincho", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.zen-old-mincho-semibold {
+  font-family: "Zen Old Mincho", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.zen-old-mincho-bold {
+  font-family: "Zen Old Mincho", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.zen-old-mincho-black {
+  font-family: "Zen Old Mincho", serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.kiwi-maru-light {
+  font-family: "Kiwi Maru", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.kiwi-maru-regular {
+  font-family: "Kiwi Maru", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.kiwi-maru-medium {
+  font-family: "Kiwi Maru", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.m-plus-1-uniquifier {
+  font-family: "M PLUS 1", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.shippori-mincho-b1-regular {
+  font-family: "Shippori Mincho B1", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.shippori-mincho-b1-medium {
+  font-family: "Shippori Mincho B1", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.shippori-mincho-b1-semibold {
+  font-family: "Shippori Mincho B1", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.shippori-mincho-b1-bold {
+  font-family: "Shippori Mincho B1", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.shippori-mincho-b1-extrabold {
+  font-family: "Shippori Mincho B1", serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-antique-light {
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-antique-regular {
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-antique-medium {
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-antique-bold {
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.zen-kaku-gothic-antique-black {
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.kosugi-regular {
+  font-family: "Kosugi", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.klee-one-regular {
+  font-family: "Klee One", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.klee-one-semibold {
+  font-family: "Klee One", cursive;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.m-plus-2-uniquifier {
+  font-family: "M PLUS 2", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.biz-udgothic-regular {
+  font-family: "BIZ UDGothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.biz-udgothic-bold {
+  font-family: "BIZ UDGothic", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.zen-kurenaido-regular {
+  font-family: "Zen Kurenaido", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.mochiy-pop-one-regular {
+  font-family: "Mochiy Pop One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ibm-plex-sans-jp-thin {
+  font-family: "IBM Plex Sans JP", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.ibm-plex-sans-jp-extralight {
+  font-family: "IBM Plex Sans JP", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.ibm-plex-sans-jp-light {
+  font-family: "IBM Plex Sans JP", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ibm-plex-sans-jp-regular {
+  font-family: "IBM Plex Sans JP", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ibm-plex-sans-jp-medium {
+  font-family: "IBM Plex Sans JP", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.ibm-plex-sans-jp-semibold {
+  font-family: "IBM Plex Sans JP", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.ibm-plex-sans-jp-bold {
+  font-family: "IBM Plex Sans JP", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.murecho-uniquifier {
+  font-family: "Murecho", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.zen-antique-soft-regular {
+  font-family: "Zen Antique Soft", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.biz-udpmincho-regular {
+  font-family: "BIZ UDPMincho", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.biz-udpmincho-bold {
+  font-family: "BIZ UDPMincho", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.hina-mincho-regular {
+  font-family: "Hina Mincho", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.zen-antique-regular {
+  font-family: "Zen Antique", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.mochiy-pop-p-one-regular {
+  font-family: "Mochiy Pop P One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.yuji-syuku-regular {
+  font-family: "Yuji Syuku", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.m-plus-1-code-uniquifier {
+  font-family: "M PLUS 1 Code", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.biz-udmincho-regular {
+  font-family: "BIZ UDMincho", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.biz-udmincho-bold {
+  font-family: "BIZ UDMincho", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* 영어 */
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Itim&family=Lora:ital,wght@0,400..700;1,400..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=block');
+
+.quicksand-uniquifier {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+
+.lora-uniquifier {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+}
+
+.amiri-regular {
+  font-family: "Amiri", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.amiri-bold {
+  font-family: "Amiri", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.amiri-regular-italic {
+  font-family: "Amiri", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.amiri-bold-italic {
+  font-family: "Amiri", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.comic-neue-light {
+  font-family: "Comic Neue", cursive;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.comic-neue-regular {
+  font-family: "Comic Neue", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.comic-neue-bold {
+  font-family: "Comic Neue", cursive;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.comic-neue-light-italic {
+  font-family: "Comic Neue", cursive;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.comic-neue-regular-italic {
+  font-family: "Comic Neue", cursive;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.comic-neue-bold-italic {
+  font-family: "Comic Neue", cursive;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.itim-regular {
+  font-family: "Itim", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.open-sans-uniquifier {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.afacad-flux-uniquifier {
+  font-family: "Afacad Flux", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0;
+}

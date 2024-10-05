@@ -81,12 +81,17 @@ async function init(flag, type) {
         // 애니메이션 중이면 단축키 동작 안함
         if (isAnimating) return;
 
-        if (event.key === 'Enter') {
+        if (event.key === 'ArrowRight' || event.key === 'Enter') {
             handleClickNext();
-        } else if (event.key === 'p') {
-            handleClickSave();
-        } else if (event.key === 'Backspace') {
+        }
+        else if (event.key === 'ArrowLeft' || event.key === 'Backspace') {
             handleClickPre();
+        }
+        else if (event.key === 'ArrowUp' || event.key === 'Quote') {
+            handleClickSave();
+        }
+        else if (event.key === 'ArrowDown' || event.key === 'Backslash') {
+            handleClickDelete();
         }
     });
 }
