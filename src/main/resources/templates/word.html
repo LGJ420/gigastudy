@@ -18,17 +18,19 @@
             onclick="handleClickNext()">다음</button>
         <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30"
             onclick="handleClickSave()">저장</button>
-        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30">섞기</button>
+        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30"
+            onclick="handleClickShuffle()">섞기</button>
         <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 hover:opacity-30">추가</button>
     </div>
 
     <div id="loadingBarContainer" class="fixed inset-0 flex items-center justify-center bg-white z-50">
-        <div class="w-1/2">
-            <div>로딩중입니다...</div>
-            <div class="bg-gray-200 rounded-full">
+        <div class="w-1/2 text-center">
+            <div class="mb-4 text-lg font-semibold">로딩중입니다...</div>
+            <div class="bg-gray-200 rounded-full h-4">
                 <div id="loadingBar" class="bg-blue-500 h-4 rounded-full w-0"></div>
             </div>
         </div>
     </div>
+    
 
 </div>

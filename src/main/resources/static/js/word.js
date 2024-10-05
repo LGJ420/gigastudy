@@ -87,16 +87,30 @@ async function init(flag, type) {
 
 
 
+// 로딩 화면 표시
+function showLoadingScreen() {
+    const loadingBarContainer = document.getElementById("loadingBarContainer");
+    loadingBarContainer.style.opacity = '1';
+    loadingBarContainer.classList.remove('hidden');
 
-// 스크린 페이드아웃
+    // 로딩 바 초기화
+    updateLoadingBar(0);
+}
+
+
+
+
+// 로딩 화면 페이드아웃
 function fadeOutLoadingScreen() {
     const loadingBarContainer = document.getElementById("loadingBarContainer");
-    loadingBarContainer.style.opacity = '0'; // 투명하게 설정
+
+    // 페이드아웃 애니메이션이 진행됨
+    loadingBarContainer.style.opacity = '0';
 
     // 페이드아웃 애니메이션이 끝난 후 로딩바를 제거
     setTimeout(() => {
-        loadingBarContainer.style.display = 'none'; // 완전히 제거
-    }, 500); // 페이드아웃 시간과 맞춤 (0.5초 후에 제거)
+        loadingBarContainer.classList.add('hidden');
+    }, 500);
 }
 
 
@@ -235,5 +249,44 @@ async function handleClickSave() {
         } catch (error) {
             console.error('암기장 저장에 실패하였습니다.', error);
         }
+    }
+}
+
+
+
+
+// 단어 섞기
+async function handleClickShuffle() {
+    try {
+        // 로딩 화면 표시
+        showLoadingScreen();
+        updateLoadingBar(70);
+
+        // 단어 섞기 요청 보내기
+        await fetch('/api/userword/shuffle', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        console.log('단어 섞기가 완료되었습니다.');
+        updateLoadingBar(100);
+
+        setTimeout(() => {
+            fadeOutLoadingScreen();
+        }, 500);
+
+        setTimeout(() => {
+            alert('단어가 섞였습니다. 사이트를 다시 불러옵니다');
+            window.location.reload();
+        }, 1200);
+
+    } catch (error) {
+        console.error('단어 섞기에 실패하였습니다.', error);
+        updateLoadingBar(100);
+
+        setTimeout(() => {
+            fadeOutLoadingScreen();
+        }, 500);
     }
 }
