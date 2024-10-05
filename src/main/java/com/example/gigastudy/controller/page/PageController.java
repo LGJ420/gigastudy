@@ -12,12 +12,6 @@ public class PageController {
         return "index";
     }
 
-    @GetMapping("home")
-    public String homePage(){
-
-        return "redirect:/";
-    }
-
     @GetMapping("test")
     public String testPage() {
 

@@ -2,37 +2,41 @@ package com.example.gigastudy.controller.page;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class CustomErrorController implements ErrorController {
 
-    // 현재는 error.html페이지 하나만 사용중이다.
     @RequestMapping("/error")
-    public String handleError(HttpServletRequest request) {
+    public String handleError(HttpServletResponse response, Model model) {
 
-        // 상태 코드 확인하여 적절한 에러 페이지 반환
-        Object statusCodeObj = request.getAttribute("javax.servlet.error.status_code");
+    int statusCode = response.getStatus();
 
-        // statusCode가 null인 경우 기본 에러 페이지 반환
-        if (statusCodeObj == null) {
-            return "error/error";
-        }
+    String errorTitle;
+    String errorMessage;
 
-        Integer statusCode = (Integer) statusCodeObj;
-
-        // 404 에러 페이지
-        if (statusCode == 404) {
-            return "error/error";
-        }
-        // 500 에러 페이지
-        else if (statusCode == 500) {
-            return "error/error";
-        }
-        // 그 외 에러 페이지
-        else {
-            return "error/error";
-        }
+    // 상태 코드에 따라 다른 메시지 설정
+    switch (statusCode) {
+        case 404:
+            errorTitle = "죄송합니다";
+            errorMessage = "사이트 준비중입니다.";
+            break;
+        case 500:
+            errorTitle = "경고";
+            errorMessage = "잘못된 접근방식입니다.";
+            break;
+        default:
+            errorTitle = "ERROR";
+            errorMessage = "에러가 발생하였습니다.";
+            break;
     }
+
+    model.addAttribute("errorTitle", errorTitle);
+    model.addAttribute("errorMessage", errorMessage);
+
+    return "error/error";
+}
+
 }
