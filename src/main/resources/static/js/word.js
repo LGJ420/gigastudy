@@ -290,3 +290,9 @@ async function handleClickShuffle() {
         }, 500);
     }
 }
+
+
+function test(){
+
+    console.log("유후");
+}
