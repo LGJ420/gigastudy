@@ -1,6 +1,6 @@
 <nav th:fragment="nav">
-    <div class="flex items-center justify-between p-3">
-        <a class="flex items-center" href="#">
+    <div class="flex items-center justify-between p-3 select-none">
+        <a class="flex items-center" href="/home">
             <img class="w-10 h-10 object-contain"
                 src="/images/logo.png" alt="Logo">
             <div class="px-2">
@@ -9,20 +9,20 @@
         </a>
         <div class="ml-10 mr-auto">
             <ul class="flex items-center">
-                <li class="px-2">
+                <li class="px-2 hover:opacity-30">
                     <a href="/kanji">한자</a>
                 </li>
-                <li class="px-2">
+                <li class="px-2 hover:opacity-30">
                     <a href="/english">영어</a>
                 </li>
-                <li class="px-2">
+                <li class="px-2 hover:opacity-30">
                     <a href="/kanji/saved">한자(암기장)</a>
                 </li>
-                <li class="px-2">
+                <li class="px-2 hover:opacity-30">
                     <a href="/english/saved">영어(암기장)</a>
                 </li>
             </ul>
         </div>
-        <a href="#">로그인</a>
+        <a href="/login" class="hover:opacity-30">로그인</a>
     </div>
 </nav>
