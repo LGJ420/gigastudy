@@ -6,7 +6,7 @@ function showConfirm(message, onConfirm, onCancel) {
     const confirmNo = document.getElementById('confirmNo');
 
     // 메시지 설정
-    confirmMessage.textContent = message;
+    confirmMessage.innerHTML = message;
 
     // 모달 오버레이 보이기 (display: flex 적용)
     confirmModal.classList.remove('hidden');

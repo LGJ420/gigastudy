@@ -7,9 +7,9 @@ let isAnimating = false;
 // 사이트 초기화
 async function init(flag, type) {
 
+    showLoadingScreen("단어를 불러오는 중입니다...");
 
     try {
-
         getType = type;
 
         if (flag === null) {
@@ -18,7 +18,7 @@ async function init(flag, type) {
             getFlag = flag
         }
 
-        updateLoadingBar(20);
+        updateLoadingBar(30);
 
 
 
@@ -88,10 +88,13 @@ async function init(flag, type) {
 
 
 // 로딩 화면 표시
-function showLoadingScreen() {
+function showLoadingScreen(message) {
     const loadingBarContainer = document.getElementById("loadingBarContainer");
     loadingBarContainer.style.opacity = '1';
     loadingBarContainer.classList.remove('hidden');
+
+    const loadingMessage = document.getElementById("loadingMessage");
+    loadingMessage.innerText = message;
 
     // 로딩 바 초기화
     updateLoadingBar(0);
@@ -245,7 +248,7 @@ async function handleClickSave() {
         const wordId = words[currentIndex].wordDTO.id;
         try {
             await fetch(`/api/userword/${wordId}`, { method: 'POST' });
-            alert('암기장에 저장되었습니다.');
+            showAlert('암기장에 저장되었습니다.')
         } catch (error) {
             console.error('암기장 저장에 실패하였습니다.', error);
         }
@@ -259,7 +262,7 @@ async function handleClickSave() {
 async function handleClickShuffle() {
     try {
         // 로딩 화면 표시
-        showLoadingScreen();
+        showLoadingScreen("단어를 섞는 중입니다...");
         updateLoadingBar(70);
 
         // 단어 섞기 요청 보내기
@@ -273,11 +276,6 @@ async function handleClickShuffle() {
         updateLoadingBar(100);
 
         setTimeout(() => {
-            fadeOutLoadingScreen();
-        }, 500);
-
-        setTimeout(() => {
-            alert('단어가 섞였습니다. 사이트를 다시 불러옵니다');
             window.location.reload();
         }, 1200);
 

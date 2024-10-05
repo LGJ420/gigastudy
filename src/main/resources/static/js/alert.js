@@ -4,7 +4,7 @@ function showAlert(message) {
     const alertMessage = document.getElementById('alertMessage');
 
     // 메시지 설정
-    alertMessage.textContent = message;
+    alertMessage.innerHTML = message;
 
     // 모달 오버레이 보이기 (display: flex 적용)
     alertModal.classList.remove('hidden');
