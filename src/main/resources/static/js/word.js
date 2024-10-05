@@ -313,7 +313,11 @@ async function handleClickShuffle() {
 }
 
 
-function test(){
 
-    console.log("유후");
+
+// 처음으로 이동
+function handleClickFirst(){
+
+    currentIndex = 0;
+    displayWord();
 }
