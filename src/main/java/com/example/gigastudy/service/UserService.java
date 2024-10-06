@@ -3,6 +3,7 @@ package com.example.gigastudy.service;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final WordRepository wordRepository;
     private final UserWordRepository userWordRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     // 회원가입
@@ -32,11 +34,12 @@ public class UserService {
             throw new IllegalArgumentException("이미 존재하는 사용자 이름입니다.");
         }
 
-        // 단순히 비밀번호를 저장, 스프링 시큐리티 설치후 수정필요
+        // 비밀번호를 암호화하여 저장
         User user = User.builder()
             .username(userDTO.getUsername())
-            .password(userDTO.getPassword())
+            .password(passwordEncoder.encode(userDTO.getPassword()))
             .nickname(userDTO.getNickname())
+            .role(userDTO.getRole())
             .build();
 
         userRepository.save(user);
