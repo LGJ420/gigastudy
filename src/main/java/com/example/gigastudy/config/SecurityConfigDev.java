@@ -9,7 +9,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.example.gigastudy.security.filter.JWTCheckFilter;
+import com.example.gigastudy.security.handler.CustomAccessDenieHandler;
 import com.example.gigastudy.security.handler.LoginFailHandler;
 import com.example.gigastudy.security.handler.LoginSuccessHandler;
 import com.example.gigastudy.service.UserDetailsServiceImpl;
@@ -29,7 +32,8 @@ public class SecurityConfigDev {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf->csrf.disable()) // 개발 시 CSRF 비활성화
+            // 개발 시에는 CSRF 비활성화
+            .csrf(csrf->csrf.disable())
             .authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/", "/home", "/css/**", "/js/**", "/images/**", "/fonts/**", "/api/user").permitAll()
                 .anyRequest().authenticated()
@@ -40,9 +44,16 @@ public class SecurityConfigDev {
                 .failureHandler(new LoginFailHandler())
                 .permitAll()
             )
+            // 세션방식의 로그인 사용중지
             .sessionManagement(session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // 세션방식의 로그인은 사용하지않음
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
+            // JWT를 검증할 필터 추가
+            .addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class)
+            // 사용자가 접근권한이 없을경우 처리
+            .exceptionHandling(config->{
+                config.accessDeniedHandler(new CustomAccessDenieHandler());
+            })
             .logout((logout) -> logout.permitAll())
             .userDetailsService(userDetailsServiceImpl);
 

@@ -9,7 +9,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.example.gigastudy.security.filter.JWTCheckFilter;
+import com.example.gigastudy.security.handler.CustomAccessDenieHandler;
 import com.example.gigastudy.security.handler.LoginFailHandler;
 import com.example.gigastudy.security.handler.LoginSuccessHandler;
 import com.example.gigastudy.service.UserDetailsServiceImpl;
@@ -39,9 +42,16 @@ public class SecurityConfigProd {
                 .failureHandler(new LoginFailHandler())
                 .permitAll()
             )
+            // 세션방식의 로그인 사용중지
             .sessionManagement(session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // 세션방식의 로그인은 사용하지않음
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
+            // JWT를 검증할 필터 추가
+            .addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class)
+            // 사용자가 접근권한이 없을경우 처리
+            .exceptionHandling(config->{
+                config.accessDeniedHandler(new CustomAccessDenieHandler());
+            })
             .logout((logout) -> logout.permitAll())
             .userDetailsService(userDetailsServiceImpl);
 
