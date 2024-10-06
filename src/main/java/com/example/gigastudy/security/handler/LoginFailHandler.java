@@ -25,6 +25,9 @@ public class LoginFailHandler implements AuthenticationFailureHandler{
         
         log.info("로그인에 실패하였습니다." + exception);
 
+        // HTTP 상태 코드를 401 Unauthorized로 설정
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
         // 결과를 json파일로 전송
         Gson gson = new Gson();
 

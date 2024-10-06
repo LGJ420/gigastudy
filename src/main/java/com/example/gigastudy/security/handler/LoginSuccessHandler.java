@@ -7,8 +7,6 @@ import java.util.Map;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.savedrequest.DefaultSavedRequest;
-import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 
 import com.example.gigastudy.entity.User;
 import com.example.gigastudy.util.JWTUtil;
@@ -55,5 +53,5 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         printWriter.println(jsonStr);
         printWriter.close();
     }
-    
+
 }

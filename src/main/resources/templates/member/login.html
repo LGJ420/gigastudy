@@ -7,29 +7,70 @@
     <title>GIGASTUDY</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" th:href="@{/css/fonts-local.css}">
-    <link rel="stylesheet" th:href="@{/css/} + ${cssFile}">
 </head>
 
 <body>
     <h2>Login Page</h2>
-    <form th:action="@{/login}" method="post">
+    <form id="loginForm" onsubmit="event.preventDefault(); login();">
         <div>
-            <label for="username">Username:</label>
+            <label for="username">아이디</label>
             <input type="text" id="username" name="username" required>
         </div>
         <div>
-            <label for="password">Password:</label>
+            <label for="password">비밀번호</label>
             <input type="password" id="password" name="password" required>
         </div>
         <div>
-            <button type="submit">Login</button>
+            <button type="submit">로그인</button>
         </div>
     </form>
-    <div th:if="${param.error}">
-        <p>Invalid username or password.</p>
+    <a href="/signup">회원가입</a>
+    <div id="errorMessage" style="display: none; color: red;">
+        <p>아이디 또는 비밀번호가 올바르지 않습니다.</p>
     </div>
-    <div th:if="${param.logout}">
-        <p>You have been logged out.</p>
-    </div>
+
+    <script>
+        function login() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            var formData = new FormData();
+            formData.append('username', username);
+            formData.append('password', password);
+
+            // /login의 POST맵핑은 시큐리티에서 이미 준비되있다.
+            fetch('/login', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Invalid credentials');
+                }
+                return response.json();
+            })
+            .then(data => {
+
+                // 응답받은 JWT 토큰을 로컬 스토리지에 저장
+                localStorage.setItem('accessToken', data.accessToken);
+                localStorage.setItem('refreshToken', data.refreshToken);
+
+                // 원래 가고자 했던 URL로 리다이렉트
+                const targetUrl = new URLSearchParams(window.location.search).get('redirect');
+                if (targetUrl) {
+                    window.location.href = targetUrl;
+                }
+                else {
+                    // URL이 없으면 기본 페이지로 리다이렉트
+                    window.location.href = '/';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById("errorMessage").style.display = 'block';
+            });
+        }
+    </script>
 </body>
+
 </html>

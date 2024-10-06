@@ -52,7 +52,6 @@ public class SecurityConfigProd {
             .exceptionHandling(config->{
                 config.accessDeniedHandler(new CustomAccessDenieHandler());
             })
-            .logout((logout) -> logout.permitAll())
             .userDetailsService(userDetailsServiceImpl);
 
         return http.build();
