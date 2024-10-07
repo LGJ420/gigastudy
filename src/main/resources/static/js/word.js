@@ -61,7 +61,7 @@ async function init(flag, type) {
             }
         });
         words = await response.json();
-        updateLoadingBar(90); // 두번째 요청 완료 후 80%로 설정
+        updateLoadingBar(90); // 두번째 요청 완료 후 90%로 설정
 
 
 

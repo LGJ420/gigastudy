@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIGASTUDY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" th:href="@{/css/fonts-local.css}">
+</head>
+
+<body>
+
+
+    <main>
+        <div class="noto-sans-kr flex flex-col items-center justify-center h-screen -translate-y-7">
+            <div class="w-[25rem]">
+                <div class="flex justify-center">
+                    <a href="/">
+                        <img class="w-52 h-52 object-contain" src="/images/logo_col.png" alt="Logo">
+                    </a>
+                </div>
+                <form id="loginForm" onsubmit="event.preventDefault(); signup();">
+                    <div class="relative my-2 py-2 px-2 rounded-md border">
+                        <label class="absolute text-xs" for="username">아이디</label>
+                        <input type="text" id="username" name="username" placeholder="아이디를 입력해주세요"
+                            class="w-full outline-none text-center focus:placeholder-transparent" maxlength="20"
+                            required>
+                    </div>
+                    <div class="relative my-2 py-2 px-2 rounded-md border">
+                        <label class="absolute text-xs" for="password">비밀번호</label>
+                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요"
+                            class="w-full outline-none text-center focus:placeholder-transparent" maxlength="30"
+                            required>
+                    </div>
+                    <div class="relative my-2 py-2 px-2 rounded-md border">
+                        <label class="absolute text-xs" for="nickname">닉네임</label>
+                        <input type="text" id="nickname" name="nickname" placeholder="닉네임을 입력해주세요"
+                            class="w-full outline-none text-center focus:placeholder-transparent" maxlength="10"
+                            required>
+                    </div>
+                    <div>
+                        <button class="my-1 py-2 w-full rounded-md text-white bg-green-500 hover:opacity-30"
+                            type="submit">
+                            완료
+                        </button>
+                    </div>
+                </form>
+                <a href="/">
+                    <div class="text-center my-1 py-2 w-full rounded-md border border-green-500 hover:opacity-30">
+                        돌아가기
+                    </div>
+                </a>
+                <div id="errorMessage" class="hidden text-red-600">
+                    <p>입력한 값이 올바르지 않습니다.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        function signup() {
+
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let nickname = document.getElementById("nickname").value;
+
+            let data = {
+                username: username,
+                password: password,
+                nickname: nickname,
+                role: 'USER'
+            };
+
+            try {
+                fetch('/api/user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                window.location.href = '/complete';
+            }
+            catch {
+                console.error('Error:', error);
+                document.getElementById("errorMessage").style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>

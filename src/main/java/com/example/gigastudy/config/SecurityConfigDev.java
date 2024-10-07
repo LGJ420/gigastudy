@@ -35,7 +35,7 @@ public class SecurityConfigDev {
             // 토큰을 사용하므로 CSRF 보호는 필요없어진다.
             .csrf(csrf->csrf.disable())
             .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/word/**", "/", "/error", "/css/**", "/js/**", "/images/**", "/fonts/**", "/api/user").permitAll()
+                .requestMatchers("/word/**", "/signup", "/complete", "/", "/error", "/css/**", "/js/**", "/images/**", "/fonts/**", "/api/user").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin((form) -> form
