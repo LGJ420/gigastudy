@@ -23,7 +23,7 @@ public class LoginFailHandler implements AuthenticationFailureHandler{
         HttpServletResponse response,
         AuthenticationException exception) throws IOException, ServletException {
         
-        log.info("로그인에 실패하였습니다." + exception);
+        log.info("Login failed: " + exception);
 
         // HTTP 상태 코드를 401 Unauthorized로 설정
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

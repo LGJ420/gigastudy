@@ -8,9 +8,7 @@ import com.example.gigastudy.entity.*;
 import com.example.gigastudy.repository.*;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @Transactional
 @Service
 @RequiredArgsConstructor

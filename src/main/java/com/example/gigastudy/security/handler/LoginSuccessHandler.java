@@ -26,7 +26,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
             HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
 
-        log.info("로그인에 성공하였습니다." + authentication);
+        log.info("Login succeeded: " + authentication);
 
         User user = (User) authentication.getPrincipal();
 
