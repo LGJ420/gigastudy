@@ -13,54 +13,55 @@
 
 
     <main>
-    <div class="noto-sans-kr flex flex-col items-center justify-center h-screen -translate-y-7">
-        <div class="w-[25rem]">
-            <div class="flex justify-center">
-                <a href="/">
-                    <img class="w-52 h-52 object-contain" src="/images/logo_col.png" alt="Logo">
+        <div class="noto-sans-kr flex flex-col items-center justify-center h-screen -translate-y-7">
+            <div class="w-[25rem]">
+                <div class="flex justify-center">
+                    <a href="/">
+                        <img class="w-52 h-52 object-contain" src="/images/logo_col.png" alt="Logo">
+                    </a>
+                </div>
+                <form id="loginForm" onsubmit="event.preventDefault(); login();">
+                    <div class="my-2 py-2 px-2 rounded-md border">
+                        <input type="text" id="username" name="username" placeholder="아이디를 입력해주세요"
+                            class="w-full outline-none text-center focus:placeholder-transparent" maxlength="20"
+                            required>
+                    </div>
+                    <div class="my-2 py-2 px-2 rounded-md border">
+                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요"
+                            class="w-full outline-none text-center focus:placeholder-transparent" maxlength="30"
+                            required>
+                    </div>
+                    <div>
+                        <button class="my-1 py-2 w-full rounded-md text-white bg-green-500 hover:opacity-30"
+                            type="submit">
+                            로그인
+                        </button>
+                    </div>
+                </form>
+                <a href="/signup">
+                    <div class="text-center my-1 py-2 w-full rounded-md border border-green-500 hover:opacity-30">
+                        회원가입
+                    </div>
                 </a>
-            </div>
-            <form id="loginForm" onsubmit="event.preventDefault(); login();">
-                <div class="my-2 py-2 px-2 rounded-md border">
-                    <input 
-                        type="text"
-                        id="username"
-                        name="username"
-                        placeholder="아이디를 입력해주세요"
-                        class="w-full outline-none text-center focus:placeholder-transparent"
-                        maxlength="20"
-                        required>
+                <div id="errorMessage" class="hidden text-red-600">
+                    <p>아이디 또는 비밀번호가 올바르지 않습니다.</p>
                 </div>
-                <div class="my-2 py-2 px-2 rounded-md border">
-                    <input 
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="비밀번호를 입력해주세요"
-                        class="w-full outline-none text-center focus:placeholder-transparent"
-                        maxlength="30"
-                        required>
-                </div>
-                <div>
-                    <button class="my-1 py-2 w-full rounded-md text-white bg-green-500 hover:opacity-30" type="submit">
-                        로그인
-                    </button>
-                </div>
-            </form>
-            <a href="/signup">
-                <div class="text-center my-1 py-2 w-full rounded-md border border-green-500 hover:opacity-30">
-                    회원가입
-                </div>
-            </a>
-            <div id="errorMessage" class="hidden text-red-600">
-                <p>아이디 또는 비밀번호가 올바르지 않습니다.</p>
             </div>
         </div>
-    </div>
     </main>
 
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // JWT 토큰이 localStorage에 있는지 확인
+            const token = localStorage.getItem('accessToken');
+
+            // 토큰이 있으면 로그인 페이지 접근을 차단하고 에러 페이지로 리다이렉트
+            if (token) {
+                window.location.href = '/';
+            }
+        });
+
         function login() {
             let username = document.getElementById("username").value;
             let password = document.getElementById("password").value;
