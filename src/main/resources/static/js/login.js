@@ -39,7 +39,7 @@ function login() {
         window.location.href = '/';
     })
     .catch(error => {
-        console.error('Error:', error);
+        console.error('로그인에 실패하였습니다.', error);
         document.getElementById("errorMessage").style.display = 'block';
     });
 }

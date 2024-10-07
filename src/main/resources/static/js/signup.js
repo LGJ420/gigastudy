@@ -23,7 +23,7 @@ function signup() {
         window.location.href = '/complete';
     }
     catch {
-        console.error('Error:', error);
+        console.error('회원가입에 실패하였습니다.', error);
         document.getElementById("errorMessage").style.display = 'block';
     }
 }
