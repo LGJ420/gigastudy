@@ -181,6 +181,20 @@ function displayWord() {
     const wordDiv = document.getElementById("wordDisplay");
     const meaningDiv = document.getElementById("wordMeaning");
 
+    // JWT 토큰 가져오기
+    const accessToken = localStorage.getItem('accessToken');
+
+    // 로그인 상태 확인
+    if (!accessToken) {
+        wordDiv.style.fontSize = '2rem';
+        meaningDiv.style.fontSize = '2rem';
+        
+        wordDiv.textContent = "로그인이 필요한 서비스입니다.";
+        meaningDiv.textContent = "로그인이 필요한 서비스입니다.";
+
+        return;
+    }
+
     if (currentIndex < words.length && currentIndex >= 0) {
         const word = words[currentIndex].wordDTO.word;
         const meaning = words[currentIndex].wordDTO.meaning;
