@@ -36,12 +36,13 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         claims.put("username", user.getUsername());
         claims.put("nickname", user.getNickname());
 
-        // 로그인 성공시 두개의 토큰을 만들어준다, 하나는 액세스토큰, 하나는 리프레시토큰
-        String accessToken = JWTUtil.generateToken(claims, 2 * 60);
-        String refreshToken = JWTUtil.generateToken(claims, 24 * 60);
-
+        // 로그인 성공시 토큰을 만들어준다
+        String accessToken = JWTUtil.generateToken(claims, 24 * 60);
         claims.put("accessToken", accessToken);
-        claims.put("refreshToken", refreshToken);
+        
+        // 리프레시 토큰은 클라이언트 측에서도 처리해야 하므로 이번 프로젝트는 생략
+        // String refreshToken = JWTUtil.generateToken(claims, 30 * 24 * 60);
+        // claims.put("refreshToken", refreshToken);
 
         // 결과를 json파일로 전송
         Gson gson = new Gson();
