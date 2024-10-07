@@ -3,6 +3,7 @@ package com.example.gigastudy.controller.api;
 import java.util.*;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.gigastudy.dto.UserWordDTO;
@@ -18,14 +19,19 @@ public class UserWordController {
 
     private final UserWordService userWordService;
 
+    // 현재 로그인한 유저의 아이디를 가져오는 메서드
+    private Long getCurrentUserId() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return user.getId();
+    }
+
     // 단어 유형별 불러오기
     @GetMapping
     public ResponseEntity<?> getWords(
             @RequestParam(value = "flag", required = false) Boolean flag,
             @RequestParam(value = "type", required = false) WordType type) {
 
-        // 현재 유저아이디 1로 고정
-        Long userId = 1L;
+        Long userId = getCurrentUserId();
 
         List<UserWordDTO> userWordDTOs = userWordService.getWords(userId, flag, type);
 
@@ -36,8 +42,7 @@ public class UserWordController {
     @PostMapping("/{wordId}")
     public ResponseEntity<?> saveFlag(@PathVariable Long wordId) {
 
-        // 현재 유저아이디 1로 고정
-        Long userId = 1L;
+        Long userId = getCurrentUserId();
 
         userWordService.saveFlag(userId, wordId);
 
@@ -48,8 +53,7 @@ public class UserWordController {
     @DeleteMapping("/{wordId}")
     public ResponseEntity<?> deleteFlag(@PathVariable Long wordId) {
 
-        // 현재 유저아이디 1로 고정
-        Long userId = 1L;
+        Long userId = getCurrentUserId();
 
         userWordService.deleteFlag(userId, wordId);
 
@@ -60,8 +64,7 @@ public class UserWordController {
     @PostMapping("/shuffle")
     public ResponseEntity<?> shuffleWords() {
 
-        // 현재 유저아이디 1로 고정
-        Long userId = 1L;
+        Long userId = getCurrentUserId();
 
         userWordService.shuffleWords(userId);
 
