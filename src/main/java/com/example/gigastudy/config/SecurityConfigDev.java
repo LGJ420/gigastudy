@@ -32,10 +32,10 @@ public class SecurityConfigDev {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            // 개발 시에는 CSRF 비활성화
+            // 토큰을 사용하므로 CSRF 보호는 필요없어진다.
             .csrf(csrf->csrf.disable())
             .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/", "/home", "/css/**", "/js/**", "/images/**", "/fonts/**", "/api/user").permitAll()
+                .requestMatchers("/word/**", "/", "/error", "/css/**", "/js/**", "/images/**", "/fonts/**", "/api/user").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin((form) -> form
@@ -51,7 +51,11 @@ public class SecurityConfigDev {
             // JWT를 검증할 필터 추가
             .addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class)
             // 사용자가 접근권한이 없을경우 처리
-            .exceptionHandling(config->{
+            .exceptionHandling(config -> {
+                config.authenticationEntryPoint((request, response, authException) -> {
+                    // 여기서 에러 페이지로 리다이렉트
+                    response.sendRedirect("/error");
+                });
                 config.accessDeniedHandler(new CustomAccessDenieHandler());
             })
             .userDetailsService(userDetailsServiceImpl);

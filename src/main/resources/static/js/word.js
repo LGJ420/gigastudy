@@ -30,11 +30,14 @@ async function init(flag, type) {
 
 
 
+        // JWT 토큰 가져오기
+        const accessToken = localStorage.getItem('accessToken');
+
         // currentIndex 불러오기
         const indexResponse = await fetch(`/api/userindex?flag=${getFlag}&type=${type}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${accessToken}`
             }
         });
         currentIndex = await indexResponse.json();
@@ -51,7 +54,12 @@ async function init(flag, type) {
             wordsUrl += `&flag=${flag}`;
         }
 
-        const response = await fetch(wordsUrl);
+        const response = await fetch(wordsUrl, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
         words = await response.json();
         updateLoadingBar(90); // 두번째 요청 완료 후 80%로 설정
 
@@ -143,9 +151,13 @@ function updateLoadingBar(percent) {
 // 인덱스 저장
 async function saveCurrentIndex() {
     try {
-        const response = await fetch('/api/userindex', {
+        // JWT 토큰 가져오기
+        const accessToken = localStorage.getItem('accessToken');
+
+        await fetch('/api/userindex', {
             method: 'POST',
             headers: {
+                'Authorization': `Bearer ${accessToken}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -259,7 +271,15 @@ async function handleClickSave() {
     if (currentIndex < words.length) {
         const wordId = words[currentIndex].wordDTO.id;
         try {
-            await fetch(`/api/userword/${wordId}`, { method: 'POST' });
+            // JWT 토큰 가져오기
+            const accessToken = localStorage.getItem('accessToken');
+
+            await fetch(`/api/userword/${wordId}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            });
             showAlert('암기장에 저장되었습니다.')
         } catch (error) {
             console.error('암기장 저장에 실패하였습니다.', error);
@@ -275,7 +295,15 @@ async function handleClickDelete() {
     if (currentIndex < words.length) {
         const wordId = words[currentIndex].wordDTO.id;
         try {
-            await fetch(`/api/userword/${wordId}`, { method: 'DELETE' });
+            // JWT 토큰 가져오기
+            const accessToken = localStorage.getItem('accessToken');
+
+            await fetch(`/api/userword/${wordId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                }
+            });
             showAlert('암기장에서 삭제되었습니다.')
         } catch (error) {
             console.error('암기장 삭제에 실패하였습니다.', error);
@@ -293,11 +321,14 @@ async function handleClickShuffle() {
         showLoadingScreen("단어를 섞는 중입니다...");
         updateLoadingBar(70);
 
+        // JWT 토큰 가져오기
+        const accessToken = localStorage.getItem('accessToken');
+
         // 단어 섞기 요청 보내기
         await fetch('/api/userword/shuffle', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+               'Authorization': `Bearer ${accessToken}`
             }
         });
         console.log('단어 섞기가 완료되었습니다.');

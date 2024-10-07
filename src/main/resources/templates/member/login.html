@@ -31,10 +31,10 @@
 
     <script>
         function login() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
 
-            var formData = new FormData();
+            let formData = new FormData();
             formData.append('username', username);
             formData.append('password', password);
 
@@ -55,15 +55,8 @@
                 localStorage.setItem('accessToken', data.accessToken);
                 localStorage.setItem('refreshToken', data.refreshToken);
 
-                // 원래 가고자 했던 URL로 리다이렉트
-                const targetUrl = new URLSearchParams(window.location.search).get('redirect');
-                if (targetUrl) {
-                    window.location.href = targetUrl;
-                }
-                else {
-                    // URL이 없으면 기본 페이지로 리다이렉트
-                    window.location.href = '/';
-                }
+                // 홈으로 리다이렉트
+                window.location.href = '/';
             })
             .catch(error => {
                 console.error('Error:', error);

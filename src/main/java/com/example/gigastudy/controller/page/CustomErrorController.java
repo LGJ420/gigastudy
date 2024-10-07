@@ -24,12 +24,12 @@ public class CustomErrorController implements ErrorController {
             errorMessage = "사이트 준비중입니다.";
             break;
         case 500:
-            errorTitle = "경고";
-            errorMessage = "잘못된 접근방식입니다.";
-            break;
-        default:
             errorTitle = "ERROR";
             errorMessage = "에러가 발생하였습니다.";
+            break;
+        default:
+            errorTitle = "경고";
+            errorMessage = "잘못된 접근방식입니다.";
             break;
     }
 
