@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.servlet.http.HttpServletResponse;
 
+// 현재 계속 200에 대한 처리만 발생중, 오류 수정 필요
 @Controller
 public class CustomErrorController implements ErrorController {
 
@@ -24,12 +25,12 @@ public class CustomErrorController implements ErrorController {
             errorMessage = "사이트 준비중입니다.";
             break;
         case 500:
-            errorTitle = "ERROR";
-            errorMessage = "에러가 발생하였습니다.";
-            break;
-        default:
             errorTitle = "경고";
             errorMessage = "잘못된 접근방식입니다.";
+            break;
+        default:
+            errorTitle = "죄송합니다";
+            errorMessage = "사이트 준비중입니다.";
             break;
     }
 
