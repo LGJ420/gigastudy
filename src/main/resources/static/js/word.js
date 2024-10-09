@@ -178,6 +178,10 @@ async function saveCurrentIndex() {
 // 단어카드 보여주기
 function displayWord() {
 
+    // 가렸었던 카드 보이기
+    const card = document.getElementById("wordCard");
+    card.classList.remove("opacity-0");
+
     const wordDiv = document.getElementById("wordDisplay");
     const meaningDiv = document.getElementById("wordMeaning");
 
@@ -241,16 +245,22 @@ function handleClickNext() {
         if (turning) {
             isAnimating = true;
             const wordDiv = document.getElementById("wordDisplay");
+            const meaningDiv = document.getElementById("wordMeaning");
             wordDiv.textContent = " ";
+            meaningDiv.textContent = " ";
             card.classList.add("fly-off");
             card.addEventListener('animationend', () => {
                 currentIndex++;
                 turning = false;
+                card.classList.add("opacity-0");
                 card.classList.remove("fly-off");
                 card.classList.remove("flipped");
-                displayWord();
                 saveCurrentIndex();
-                isAnimating = false;
+                
+                setTimeout(()=>{
+                    displayWord();
+                    isAnimating = false;
+                }, 200);
             }, { once: true });
         } else {
             isAnimating = true;
