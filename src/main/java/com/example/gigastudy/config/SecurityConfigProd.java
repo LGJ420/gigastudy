@@ -12,7 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.example.gigastudy.security.filter.JWTCheckFilter;
-import com.example.gigastudy.security.handler.CustomAccessDenieHandler;
+import com.example.gigastudy.security.handler.CustomAccessDeniedHandler;
 import com.example.gigastudy.security.handler.LoginFailHandler;
 import com.example.gigastudy.security.handler.LoginSuccessHandler;
 import com.example.gigastudy.service.UserDetailsServiceImpl;
@@ -57,7 +57,7 @@ public class SecurityConfigProd {
                     // 여기서 에러 페이지로 리다이렉트
                     response.sendRedirect("/error");
                 });
-                config.accessDeniedHandler(new CustomAccessDenieHandler());
+                config.accessDeniedHandler(new CustomAccessDeniedHandler());
             })
             .userDetailsService(userDetailsServiceImpl);
 

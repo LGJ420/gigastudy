@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 // 접근권한 없을경우의 처리
-public class CustomAccessDenieHandler implements AccessDeniedHandler{
+public class CustomAccessDeniedHandler implements AccessDeniedHandler{
 
     @Override
     public void handle(HttpServletRequest request,
