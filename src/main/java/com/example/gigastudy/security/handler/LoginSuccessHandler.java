@@ -33,7 +33,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         // 토큰을 만들기위한 claim을 만들어준다
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", user.getId());
-        claims.put("username", user.getUsername());
+        claims.put("userId", user.getUserId());
         claims.put("nickname", user.getNickname());
         claims.put("role", user.getRole().name());
 

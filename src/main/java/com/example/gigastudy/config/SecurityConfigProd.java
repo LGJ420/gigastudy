@@ -40,6 +40,8 @@ public class SecurityConfigProd {
             )
             .formLogin((form) -> form
                 .loginPage("/login")
+                .usernameParameter("userId")
+                .passwordParameter("userPw")
                 .successHandler(new LoginSuccessHandler())
                 .failureHandler(new LoginFailHandler())
                 .permitAll()

@@ -21,10 +21,10 @@ public class User implements UserDetails{
     private Long id;
 
     @Column(nullable = false)
-    private String username;
+    private String userId;
 
     @Column(nullable = false)
-    private String password;
+    private String userPw;
 
     @Column(nullable = false)
     private String nickname;
@@ -32,6 +32,18 @@ public class User implements UserDetails{
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    // username 명칭 대체
+    @Override
+    public String getUsername() {
+        return userId;  // userId를 username으로 사용
+    }
+
+    // password 명칭 대체
+    @Override
+    public String getPassword() {
+        return userPw;  // userPw를 password로 사용
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -9,12 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function login() {
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+    let userId = document.getElementById("userId").value;
+    let userPw = document.getElementById("userPw").value;
 
     let formData = new FormData();
-    formData.append('username', username);
-    formData.append('password', password);
+    formData.append('userId', userId);
+    formData.append('userPw', userPw);
 
     // /login의 POST맵핑은 시큐리티에서 이미 준비되있다.
     fetch('/login', {

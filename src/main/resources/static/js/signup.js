@@ -1,12 +1,12 @@
 function signup() {
 
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+    let userId = document.getElementById("userId").value;
+    let userPw = document.getElementById("userPw").value;
     let nickname = document.getElementById("nickname").value;
 
     let data = {
-        username: username,
-        password: password,
+        userId: userId,
+        userPw: userPw,
         nickname: nickname,
         role: 'USER'
     };

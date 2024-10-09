@@ -27,15 +27,15 @@ public class UserService {
     // 회원가입
     public void signUp(UserDTO userDTO){
 
-        if (userRepository.existsByUsername(userDTO.getUsername())) {
+        if (userRepository.existsByUserId(userDTO.getUserId())) {
 
             throw new IllegalArgumentException("이미 존재하는 사용자 이름입니다.");
         }
 
         // 비밀번호를 암호화하여 저장
         User user = User.builder()
-            .username(userDTO.getUsername())
-            .password(passwordEncoder.encode(userDTO.getPassword()))
+            .userId(userDTO.getUserId())
+            .userPw(passwordEncoder.encode(userDTO.getUserPw()))
             .nickname(userDTO.getNickname())
             .role(userDTO.getRole())
             .build();

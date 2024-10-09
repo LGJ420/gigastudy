@@ -8,6 +8,6 @@ import com.example.gigastudy.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
     
-    Optional<User> findByUsername(String username);
-    boolean existsByUsername(String username);
+    Optional<User> findByUserId(String userId);
+    boolean existsByUserId(String userId);
 }

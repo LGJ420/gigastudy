@@ -53,24 +53,24 @@ public class JWTCheckFilter extends OncePerRequestFilter {
             Map<String, Object> claims = JWTUtil.validateToken(accessToken);
 
             // 클레임에서 유저 정보 추출
-            String username = (String) claims.get("username");
+            String userId = (String) claims.get("userId");
             String nickname = (String) claims.get("nickname");
             String role = (String) claims.get("role");
             Object idObject = claims.get("id");
 
             // id 값은 (Long)으로 캐스팅하려고 해도 예외가 발생해서
             // Integer로 저장될 수 있기 때문에 Long으로 강제변환
-            Long userId;
+            Long id;
             if (idObject instanceof Integer) {
-                userId = ((Integer) idObject).longValue();
+                id = ((Integer) idObject).longValue();
             } else {
-                userId = (Long) idObject;
+                id = (Long) idObject;
             }
 
             // User 객체 생성 (실제 UserDetails 구현체)
             User user = User.builder()
-                    .id(userId)
-                    .username(username)
+                    .id(id)
+                    .userId(userId)
                     .nickname(nickname)
                     .role(UserRole.valueOf(role))
                     .build();
