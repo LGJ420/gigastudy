@@ -54,7 +54,8 @@ public class SecurityConfigDev {
             // 사용자가 접근권한이 없을경우 처리
             .exceptionHandling(config -> {
                 config.authenticationEntryPoint((request, response, authException) -> {
-                    // 여기서 에러 페이지로 리다이렉트
+                    // 일반적으로는 login 페이지로 리다이렉트 한다고 함
+                    // 여기서는 에러 페이지로 리다이렉트
                     response.sendRedirect("/error");
                 });
                 config.accessDeniedHandler(new CustomAccessDeniedHandler());
