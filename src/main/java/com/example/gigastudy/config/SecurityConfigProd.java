@@ -20,7 +20,6 @@ import com.example.gigastudy.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 
 // 배포 시에 적용하는 시큐리티 설정
-// application.properties에서 편집한다
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
