@@ -1,6 +1,6 @@
 <div th:fragment="wordContent(title)">
 
-    <h1 class="gowun-dodum p-5 text-3xl select-none" th:text="${title}"></h1>
+    <h1 class="gowun-dodum p-2 sm:p-5 text-xl sm:text-3xl select-none" th:text="${title}"></h1>
     <div id="cardContainer" class="select-none">
         <div id="wordCard" class="card zen-old-mincho" onclick="handleClickNext()">
             <div id="wordDisplay" class="front">
@@ -11,18 +11,18 @@
             </div>
         </div>
     </div>
-    <div class="noto-sans-kr flex items-center justify-center h-10 py-10">
-        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 select-none hover:opacity-30"
+    <div class="noto-sans-kr flex items-center justify-center h-10 py-8 sm:py-10">
+        <button class="bg-[#f9f9f9] border rounded-md text-sm py-1 px-1 mx-2 sm:text-lg sm:py-2 sm:px-3 sm:mx-3 select-none hover:opacity-30"
             onclick="handleClickPre()">이전</button>
-        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 select-none hover:opacity-30"
+        <button class="bg-[#f9f9f9] border rounded-md text-sm py-1 px-1 mx-2 sm:text-lg sm:py-2 sm:px-3 sm:mx-3 select-none hover:opacity-30"
             onclick="handleClickNext()">다음</button>
-        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 select-none hover:opacity-30"
+        <button class="bg-[#f9f9f9] border rounded-md text-sm py-1 px-1 mx-2 sm:text-lg sm:py-2 sm:px-3 sm:mx-3 select-none hover:opacity-30"
             onclick="handleClickSave()">저장</button>
-        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 select-none hover:opacity-30 hidden"
+        <button class="bg-[#f9f9f9] border rounded-md text-sm py-1 px-1 mx-2 sm:text-lg sm:py-2 sm:px-3 sm:mx-3 select-none hover:opacity-30 hidden"
             onclick="handleClickDelete()" id="deleteButton">삭제</button>
-        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 select-none hover:opacity-30"
+        <button class="bg-[#f9f9f9] border rounded-md text-sm py-1 px-1 mx-2 sm:text-lg sm:py-2 sm:px-3 sm:mx-3 select-none hover:opacity-30"
             onclick="showConfirm('지금까지 학습한 내용이 모두 초기화됩니다.<br>정말로 섞으시겠습니까?', handleClickShuffle, null)">섞기</button>
-        <button class="bg-[#f9f9f9] border rounded-md py-2 px-3 mx-3 select-none hover:opacity-30"
+        <button class="bg-[#f9f9f9] border rounded-md text-sm py-1 px-1 mx-2 sm:text-lg sm:py-2 sm:px-3 sm:mx-3 select-none hover:opacity-30"
             onclick="showConfirm('정말 첫 단어로 돌아가시겠습니까?', handleClickFirst, null)">처음</button>
     </div>
 
