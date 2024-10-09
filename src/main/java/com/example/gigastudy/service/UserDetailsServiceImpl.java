@@ -21,7 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다: " + username));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 
         // User 엔티티를 반환 (User는 UserDetails를 구현하고 있으므로 바로 반환 가능)
         return user;
