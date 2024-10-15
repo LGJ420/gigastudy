@@ -1,22 +1,28 @@
 <nav th:fragment="nav">
-    <div class="noto-sans-kr text-[0.5rem] sm:text-lg flex items-center justify-between p-3 select-none">
+    <div class="noto-sans-kr text-sm sm:text-lg flex items-center justify-between p-3 select-none">
         <a class="flex items-center translate-y-1" href="/">
-            <img class="w-32 h-10 object-contain"
+            <img class="hidden object-contain
+                w-32 h-10 sm:block"
                 src="/images/logo_row.png" alt="Logo">
+            <img class="object-contain
+                w-16 sm:hidden"
+                src="/images/logo.png" alt="Logo">
         </a>
         <div class="ml-2 sm:ml-10 mr-auto">
             <ul class="flex items-center">
-                <li class="px-1 sm:px-2 hover:opacity-30">
+                <li class="px-2 hover:opacity-30">
                     <a href="/word/kanji">한자</a>
                 </li>
-                <li class="px-1 sm:px-2 hover:opacity-30">
+                <li class="px-2 hover:opacity-30">
                     <a href="/word/english">영어</a>
                 </li>
-                <li class="px-1 sm:px-2 hover:opacity-30">
-                    <a href="/word/kanji/saved">한자(암기장)</a>
+                <li class="px-2 hover:opacity-30">
+                    <a href="/word/kanji/saved" class="hidden sm:inline">한자(암기장)</a>
+                    <a href="/word/kanji/saved" class="sm:hidden">한자(암)</a>
                 </li>
-                <li class="px-1 sm:px-2 hover:opacity-30">
-                    <a href="/word/english/saved">영어(암기장)</a>
+                <li class="px-2 hover:opacity-30">
+                    <a href="/word/english/saved" class="hidden sm:inline">영어(암기장)</a>
+                    <a href="/word/english/saved" class="sm:hidden">영어(암)</a>
                 </li>
             </ul>
         </div>
