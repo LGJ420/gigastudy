@@ -240,7 +240,9 @@ function displayWord() {
 
 // 다음 단어로 가기
 function handleClickNext() {
+
     const card = document.getElementById("wordCard");
+    
     if (currentIndex < words.length) {
         if (turning) {
             isAnimating = true;
@@ -276,14 +278,23 @@ function handleClickNext() {
 
 // 이전 단어로 가기
 function handleClickPre() {
+
+    const card = document.getElementById("wordCard");
+
     if (currentIndex > 0) {
-        currentIndex--;
-        turning = false;
-        const card = document.getElementById("wordCard");
-        card.classList.remove("flipped");
-        card.classList.remove("fly-off");
-        displayWord();
-        saveCurrentIndex();
+        if (turning) {
+            isAnimating = true;
+            card.classList.remove("flipped");
+            turning = false;
+            isAnimating = false;
+        } else {
+            currentIndex--;
+            turning = false;
+            card.classList.remove("flipped");
+            card.classList.remove("fly-off");
+            displayWord();
+            saveCurrentIndex();
+        }
     }
 }
 
