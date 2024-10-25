@@ -19,29 +19,22 @@ import lombok.RequiredArgsConstructor;
 public class UserWordService {
 
     private final UserRepository userRepository;
-    private final WordRepository wordRepository;
     private final UserWordRepository userWordRepository;
     private final UserIndexRepository userIndexRepository;
 
-    // 단어 유형별 불러오기
-    public List<UserWordDTO> getWords(Long userId, Boolean flag, WordType type) {
+    // 일반 단어 유형별 불러오기
+    public List<UserWordDTO> getWords(Long userId, WordType wordType) {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
 
         List<UserWord> userWords;
 
-        if (flag != null && type != null) {
-            // flag와 type 둘 다 있는 경우
-            userWords = userWordRepository.findByUserAndFlagAndWord_TypeOrderBySeqAsc(user, flag, type);
-        } else if (flag != null) {
-            // flag만 있는 경우
-            userWords = userWordRepository.findByUserAndFlagOrderBySeqAsc(user, flag);
-        } else if (type != null) {
-            // type만 있는 경우
-            userWords = userWordRepository.findByUserAndWord_TypeOrderBySeqAsc(user, type);
+        if (wordType != null) {
+
+            userWords = userWordRepository.findByUserAndWordType(user, wordType);
         } else {
-            // 아무 조건도 없는 경우 (필요하면 추가)
+
             userWords = userWordRepository.findAll();
         }
 
@@ -53,71 +46,17 @@ public class UserWordService {
                                 .meaning(userWord.getWord().getMeaning())
                                 .build())
                         .seq(userWord.getSeq())
-                        .flag(userWord.getFlag())
                         .build())
                 .collect(Collectors.toList());
     }
 
-
-
-
-    // 암기장에 단어 저장하기
-    public void saveFlag(Long userId, Long wordId) {
+    // 일반 단어 섞기
+    public void shuffleWords(Long userId, WordType wordType) {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
 
-        Word word = wordRepository.findById(wordId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 단어가 존재하지 않습니다."));
-
-        // 없으면 만들어서 새로 추가
-        UserWord userWord = userWordRepository.findByUserAndWord(user, word)
-                .orElse(UserWord.builder()
-                        .user(user)
-                        .word(word)
-                        .flag(true)
-                        .build());
-
-        // 있으면 변경
-        userWord.changeFlag(true);
-        userWordRepository.save(userWord);
-    }
-
-
-
-
-    // 암기장에서 단어 삭제하기
-    public void deleteFlag(Long userId, Long wordId) {
-
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
-
-        Word word = wordRepository.findById(wordId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 단어가 존재하지 않습니다."));
-
-        // 없으면 만들어서 새로 추가
-        UserWord userWord = userWordRepository.findByUserAndWord(user, word)
-                .orElse(UserWord.builder()
-                        .user(user)
-                        .word(word)
-                        .flag(false)
-                        .build());
-
-        // 있으면 변경
-        userWord.changeFlag(false);
-        userWordRepository.save(userWord);
-    }
-
-
-
-
-    // 단어 섞기
-    public void shuffleWords(Long userId) {
-
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
-
-        List<UserWord> userWords = userWordRepository.findByUserOrderBySeqAsc(user);
+        List<UserWord> userWords = userWordRepository.findByUserAndWordType(user, wordType);
 
         // 시퀀스 재할당
         Collections.shuffle(userWords);
@@ -130,11 +69,15 @@ public class UserWordService {
         });
 
         // 인덱스 초기화
-        List<UserIndex> userIndexs = userIndexRepository.findByUser(user);
+        UserIndex userIndex = userIndexRepository.findByUserAndFlagAndType(user, false, wordType)
+                .orElseGet(() -> UserIndex.builder()
+                        .user(user)
+                        .flag(false)
+                        .type(wordType)
+                        .saveIndex(0L)
+                        .build());
 
-        userIndexs.forEach(userIndex -> {
-            userIndex.changeIndex(0L);
-            userIndexRepository.save(userIndex);
-        });
+        userIndex.changeIndex(0L);
+        userIndexRepository.save(userIndex);
     }
 }

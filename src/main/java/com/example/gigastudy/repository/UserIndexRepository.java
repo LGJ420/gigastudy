@@ -8,6 +8,5 @@ import com.example.gigastudy.entity.*;
 
 public interface UserIndexRepository extends JpaRepository<UserIndex, Long>{
     
-    List<UserIndex> findByUser(User user);
     Optional<UserIndex> findByUserAndFlagAndType(User user, Boolean flag, WordType type);
 }

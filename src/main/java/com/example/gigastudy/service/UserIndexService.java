@@ -35,7 +35,7 @@ public class UserIndexService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
 
         UserIndex userIndex = userIndexRepository.findByUserAndFlagAndType(user, userIndexDTO.getFlag(), userIndexDTO.getType())
-                .orElse(UserIndex.builder()
+                .orElseGet(() -> UserIndex.builder()
                         .user(user)
                         .type(userIndexDTO.getType())
                         .flag(userIndexDTO.getFlag())

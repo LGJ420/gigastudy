@@ -59,7 +59,6 @@ public class UserService {
                 .user(user)
                 .word(word)
                 .seq(seq.getAndIncrement())
-                .flag(false)
                 .build();
             userWordRepository.save(userWord);
         });

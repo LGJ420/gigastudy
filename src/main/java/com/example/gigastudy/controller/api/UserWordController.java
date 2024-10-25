@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class UserWordController {
 
     private final UserWordService userWordService;
+    private final SavedWordService savedWordService;
 
     // 현재 로그인한 유저의 아이디를 가져오는 메서드
     private Long getCurrentUserId() {
@@ -33,7 +34,15 @@ public class UserWordController {
 
         Long userId = getCurrentUserId();
 
-        List<UserWordDTO> userWordDTOs = userWordService.getWords(userId, flag, type);
+        List<UserWordDTO> userWordDTOs;
+
+        if (flag) {
+
+            userWordDTOs = savedWordService.getSavedWords(userId, type);
+        } else {
+
+            userWordDTOs = userWordService.getWords(userId, type);
+        }
 
         return ResponseEntity.ok(userWordDTOs);
     }
@@ -44,7 +53,7 @@ public class UserWordController {
 
         Long userId = getCurrentUserId();
 
-        userWordService.saveFlag(userId, wordId);
+        savedWordService.saveWord(userId, wordId);
 
         return ResponseEntity.ok("암기장에 단어가 저장되었습니다.");
     }
@@ -55,18 +64,26 @@ public class UserWordController {
 
         Long userId = getCurrentUserId();
 
-        userWordService.deleteFlag(userId, wordId);
+        savedWordService.deleteSavedWord(userId, wordId);
 
         return ResponseEntity.ok("암기장에서 단어가 삭제되었습니다.");
     }
 
     // 단어 섞기
     @PostMapping("/shuffle")
-    public ResponseEntity<?> shuffleWords() {
+    public ResponseEntity<?> shuffleWords(
+        @RequestParam(value = "flag", required = false) Boolean flag,
+        @RequestParam(value = "type", required = false) WordType type) {
 
         Long userId = getCurrentUserId();
 
-        userWordService.shuffleWords(userId);
+        if (flag) {
+
+            savedWordService.shuffleSavedWords(userId, type);
+        } else {
+
+            userWordService.shuffleWords(userId, type);
+        }
 
         return ResponseEntity.ok("단어가 성공적으로 섞였습니다.");
     }
