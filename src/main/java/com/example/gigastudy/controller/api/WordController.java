@@ -29,7 +29,7 @@ public class WordController {
     // 단어 유형별 불러오기
     @GetMapping
     public ResponseEntity<?> getWords(
-            @RequestParam(value = "flag", required = false) Boolean flag,
+            @RequestParam(value = "flag", required = false) boolean flag,
             @RequestParam(value = "type", required = false) WordType type) {
 
         Long userId = getCurrentUserId();
@@ -72,7 +72,7 @@ public class WordController {
     // 단어 섞기
     @PostMapping("/shuffle")
     public ResponseEntity<?> shuffleWords(
-        @RequestParam(value = "flag", required = false) Boolean flag,
+        @RequestParam(value = "flag", required = false) boolean flag,
         @RequestParam(value = "type", required = false) WordType type) {
 
         Long userId = getCurrentUserId();

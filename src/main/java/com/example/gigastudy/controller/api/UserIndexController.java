@@ -27,7 +27,7 @@ public class UserIndexController {
     // 인덱스 불러오기
     @GetMapping
     public ResponseEntity<?> getIndex(
-            @RequestParam("flag") Boolean flag,
+            @RequestParam("flag") boolean flag,
             @RequestParam("type") WordType type) {
 
         Long userId = getCurrentUserId();
