@@ -48,7 +48,7 @@ async function init(flag, type) {
 
 
         // 단어 리스트 불러오기
-        let wordsUrl = `/api/userword?type=${type}`;
+        let wordsUrl = `/api/word?type=${type}`;
 
         if (flag !== null) {
             wordsUrl += `&flag=${flag}`;
@@ -309,7 +309,7 @@ async function handleClickSave() {
             // JWT 토큰 가져오기
             const accessToken = localStorage.getItem('accessToken');
 
-            await fetch(`/api/userword/${wordId}`, {
+            await fetch(`/api/word/${wordId}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
@@ -333,7 +333,7 @@ async function handleClickDelete() {
             // JWT 토큰 가져오기
             const accessToken = localStorage.getItem('accessToken');
 
-            await fetch(`/api/userword/${wordId}`, {
+            await fetch(`/api/word/${wordId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
@@ -359,8 +359,15 @@ async function handleClickShuffle() {
         // JWT 토큰 가져오기
         const accessToken = localStorage.getItem('accessToken');
 
+
+        let wordsUrl = `/api/word/shuffle?type=${getType}`;
+
+        if (getFlag !== null) {
+            wordsUrl += `&flag=${getFlag}`;
+        }
+
         // 단어 섞기 요청 보내기
-        await fetch('/api/userword/shuffle', {
+        await fetch(wordsUrl, {
             method: 'POST',
             headers: {
                'Authorization': `Bearer ${accessToken}`

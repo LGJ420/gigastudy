@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/userword")
+@RequestMapping("/api/word")
 public class WordController {
 
     private final UserWordService userWordService;
@@ -60,7 +60,7 @@ public class WordController {
 
     // 암기장에서 단어 삭제하기
     @DeleteMapping("/{wordId}")
-    public ResponseEntity<?> deleteFlag(@PathVariable Long wordId) {
+    public ResponseEntity<?> deleteSavedWord(@PathVariable Long wordId) {
 
         Long userId = getCurrentUserId();
 

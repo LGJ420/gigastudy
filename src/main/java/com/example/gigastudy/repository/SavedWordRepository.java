@@ -17,7 +17,7 @@ public interface SavedWordRepository extends JpaRepository<SavedWord, Long>{
 
     void deleteByUserAndWord(User user, Word word);
 
-    @Query("SELECT sw FROM SavedWord sw WHERE sw.user = :user AND sw.word.type = :type")
+    @Query("SELECT sw FROM SavedWord sw WHERE sw.user = :user AND sw.word.type = :type ORDER BY sw.seq")
     List<SavedWord> findByUserAndWordType(@Param("user") User user, @Param("type") WordType type);
 
     @Query("SELECT COALESCE(MAX(sw.seq), 0) FROM SavedWord sw WHERE sw.user = :user AND sw.word.type = :type")

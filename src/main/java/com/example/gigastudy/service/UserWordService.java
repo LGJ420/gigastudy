@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,7 +36,7 @@ public class UserWordService {
             userWords = userWordRepository.findByUserAndWordType(user, wordType);
         } else {
 
-            userWords = userWordRepository.findAll();
+            userWords = userWordRepository.findAll(Sort.by("seq"));
         }
 
         return userWords.stream()
