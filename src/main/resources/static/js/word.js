@@ -216,7 +216,7 @@ function displayWord() {
 
         if (meaning.length > 10) {
             meaningDiv.style.fontSize = '2rem';
-        } else if (meaning.length > 6) {
+        } else if (meaning.length > 5) {
             meaningDiv.style.fontSize = '3rem';
         } else {
             meaningDiv.style.fontSize = '5rem';
