@@ -199,6 +199,9 @@ function displayWord() {
         return;
     }
 
+    // 화면에 카운트 표시
+    cardCounting();
+
     if (currentIndex < words.length && currentIndex >= 0) {
         const word = words[currentIndex].wordDTO.word;
         const meaning = words[currentIndex].wordDTO.meaning;
@@ -398,4 +401,22 @@ function handleClickFirst(){
 
     currentIndex = 0;
     displayWord();
+}
+
+
+
+
+// 카드 카운팅
+function cardCounting(){
+
+    const countDiv = document.getElementById("cardCount");
+
+    if (currentIndex === words.length) {
+    
+        countDiv.textContent = "finish"
+    }
+    else {
+
+        countDiv.textContent = `${currentIndex + 1} / ${words.length}`
+    }
 }

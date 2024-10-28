@@ -1,6 +1,8 @@
 <div th:fragment="wordContent(title)">
-
-    <h1 class="gowun-dodum p-2 sm:p-5 text-xl sm:text-3xl select-none" th:text="${title}"></h1>
+    <div class="flex items-center justify-between p-2 sm:p-5">
+        <h1 class="gowun-dodum text-xl sm:text-3xl select-none" th:text="${title}"></h1>
+        <div id="cardCount" class="noto-sans-kr text-sm sm:text-lg">1</div>
+    </div>
     <div id="cardContainer" class="select-none">
         <div id="wordCard" class="card zen-old-mincho" onclick="handleClickNext()">
             <div id="wordDisplay" class="front">
