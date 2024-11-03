@@ -38,7 +38,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         claims.put("role", user.getRole().name());
 
         // 로그인 성공시 토큰을 만들어준다
-        String accessToken = JWTUtil.generateToken(claims, 24 * 60);
+        String accessToken = JWTUtil.generateToken(claims, 30 * 24 * 60);
         claims.put("accessToken", accessToken);
         
         // 리프레시 토큰은 클라이언트 측에서도 처리해야 하므로 이번 프로젝트는 생략
