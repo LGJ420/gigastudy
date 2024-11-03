@@ -4,7 +4,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +36,7 @@ public class SavedWordService {
             savedWords = savedWordRepository.findByUserAndWordType(user, wordType);
         } else {
 
-            savedWords = savedWordRepository.findAll(Sort.by("seq"));
+            savedWords = savedWordRepository.findByUserOrderBySeqAsc(user);
         }
 
         return savedWords.stream()

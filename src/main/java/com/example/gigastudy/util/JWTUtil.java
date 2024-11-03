@@ -20,10 +20,10 @@ public class JWTUtil {
     private static final SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_KEY));
 
     // 토큰 생성 메서드
-    public static String generateToken(Map<String, Object> claims, int minute) {
+    public static String generateToken(Map<String, Object> claims, long minute) {
         return Jwts.builder()
                 .claims(claims)
-                .expiration(new Date(System.currentTimeMillis() + minute * 60 * 1000))
+                .expiration(new Date(System.currentTimeMillis() + minute * 60 * 1000L))
                 .signWith(key)
                 .compact();
     }
