@@ -12,7 +12,7 @@ import lombok.*;
 @Table(
     // 복합제약조건
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"word", "part"})
+        @UniqueConstraint(columnNames = {"word", "type", "part"})
     }
 )
 public class Word {
@@ -26,6 +26,8 @@ public class Word {
 
     @Column(nullable = false)
     private String meaning;
+
+    private String pronounce;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
