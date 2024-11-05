@@ -36,4 +36,13 @@ public class Word {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private WordPart part;
+
+    private String eword1;
+    private String emean1;
+    private String eword2;
+    private String emean2;
+    private String eword3;
+    private String emean3;
+    private String eword4;
+    private String emean4;
 }
