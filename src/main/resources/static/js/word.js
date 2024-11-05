@@ -204,7 +204,7 @@ function displayWord() {
 
     if (currentIndex < words.length && currentIndex >= 0) {
         const word = words[currentIndex].wordDTO.word;
-        const meaning = words[currentIndex].wordDTO.meaning;
+        const meaning = words[currentIndex].wordDTO.mean1;
 
         // 글자 길이에 따라 폰트 크기를 조정
         if (word.length > 10) {

@@ -1,1 +1,1 @@
-window.onload = () => init(true, 'ORIGIN_ENGLISH');
+window.onload = () => init(true, 'ENGLISH_ORIGIN');

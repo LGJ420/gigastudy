@@ -44,7 +44,7 @@ public class SavedWordService {
                         .wordDTO(WordDTO.builder()
                                 .id(userWord.getWord().getId())
                                 .word(userWord.getWord().getWord())
-                                .meaning(userWord.getWord().getMeaning())
+                                .mean1(userWord.getWord().getMean1())
                                 .build())
                         .seq(userWord.getSeq())
                         .build())

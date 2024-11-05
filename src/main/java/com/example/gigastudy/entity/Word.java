@@ -25,7 +25,9 @@ public class Word {
     private String word;
 
     @Column(nullable = false)
-    private String meaning;
+    private String mean1;
+    private String mean2;
+    private String mean3;
 
     private String pronounce;
 
