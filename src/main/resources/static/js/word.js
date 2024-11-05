@@ -284,6 +284,13 @@ function handleClickPre() {
 
     const card = document.getElementById("wordCard");
 
+    if (currentIndex === 0 && turning) {
+        isAnimating = true;
+        card.classList.remove("flipped");
+        turning = false;
+        isAnimating = false;
+    }
+
     if (currentIndex > 0) {
         if (turning) {
             isAnimating = true;
