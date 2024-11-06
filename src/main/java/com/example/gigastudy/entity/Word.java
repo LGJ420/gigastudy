@@ -30,6 +30,7 @@ public class Word {
     private String mean3;
 
     private String pronounce;
+    private String explain;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

@@ -1,5 +1,8 @@
 package com.example.gigastudy.dto;
 
+import com.example.gigastudy.entity.WordPart;
+import com.example.gigastudy.entity.WordType;
+
 import lombok.*;
 
 @Data
@@ -13,6 +16,12 @@ public class WordDTO {
     private String mean1;
     private String mean2;
     private String mean3;
+
+    private String pronounce;
+    private String explain;
+
+    private WordType type;
+    private WordPart part;
 
     private String eword1;
     private String emean1;
