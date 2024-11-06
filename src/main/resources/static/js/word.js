@@ -211,6 +211,8 @@ function displayWord() {
             wordDiv.style.fontSize = '2rem';
         } else if (word.length > 6) {
             wordDiv.style.fontSize = '3rem';
+        } else if (word.length > 4) {
+            wordDiv.style.fontSize = '4rem';
         } else if (word.length > 2) {
             wordDiv.style.fontSize = '5rem';
         } else {
@@ -219,8 +221,10 @@ function displayWord() {
 
         if (meaning.length > 10) {
             meaningDiv.style.fontSize = '2rem';
-        } else if (meaning.length > 5) {
+        } else if (meaning.length > 6) {
             meaningDiv.style.fontSize = '3rem';
+        } else if (meaning.length > 4) {
+            meaningDiv.style.fontSize = '4rem';
         } else {
             meaningDiv.style.fontSize = '5rem';
         }
