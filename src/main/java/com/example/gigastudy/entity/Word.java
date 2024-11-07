@@ -30,6 +30,7 @@ public class Word {
     private String mean3;
 
     private String pronounce;
+    private Long importance;
     private String description;
 
     @Column(nullable = false)
