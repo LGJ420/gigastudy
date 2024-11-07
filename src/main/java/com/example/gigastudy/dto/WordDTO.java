@@ -18,7 +18,7 @@ public class WordDTO {
     private String mean3;
 
     private String pronounce;
-    private String explain;
+    private String description;
 
     private WordType type;
     private WordPart part;
