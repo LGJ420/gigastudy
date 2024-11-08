@@ -9,6 +9,12 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(
+    // 복합제약조건
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"user_id", "word_id"})
+    }
+)
 public class UserWord {
 
     @Id
