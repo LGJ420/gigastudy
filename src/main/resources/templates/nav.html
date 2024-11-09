@@ -1,39 +1,139 @@
-<nav th:fragment="nav">
-    <div class="noto-sans-kr text-sm sm:text-lg flex items-center justify-between p-3 select-none">
-        <a class="flex items-center translate-y-1" href="/">
-            <img class="hidden object-contain
-                w-32 h-10 sm:block"
+<div th:fragment="nav">
+    <!-- 네비게이션 바 -->
+    <nav class="noto-sans-kr p-4 flex justify-between items-center">
+        <!-- 로고 -->
+        <a class="w-52 flex items-center translate-y-1
+            sm:w-32" href="/">
+            <img class="w-52 object-contain
+                sm:w-32 sm:h-10"
                 src="/images/logo_row.png" alt="Logo">
-            <img class="object-contain
-                w-16 sm:hidden"
-                src="/images/logo.png" alt="Logo">
         </a>
-        <div class="ml-2 sm:ml-10 mr-auto">
-            <ul class="flex items-center">
-                <li class="px-2 hover:opacity-30">
-                    <a href="/word/kanji">한자</a>
-                </li>
-                <li class="px-2 hover:opacity-30">
-                    <a href="/word/english">영어</a>
-                </li>
-                <li class="px-2 hover:opacity-30">
-                    <a href="/word/kanji/saved" class="hidden sm:inline">한자(암기장)</a>
-                    <a href="/word/kanji/saved" class="sm:hidden">한자(암)</a>
-                </li>
-                <li class="px-2 hover:opacity-30">
-                    <a href="/word/english/saved" class="hidden sm:inline">영어(암기장)</a>
-                    <a href="/word/english/saved" class="sm:hidden">영어(암)</a>
-                </li>
-            </ul>
-        </div>
-
+        <!-- 데스크탑 메뉴 -->
+        <ul class="hidden sm:flex space-x-6">
+            <li class="relative group p-2">
+                <a href="#" class="hover:underline">단어</a>
+                <ul class="absolute left-0 top-full hidden group-hover:block bg-white text-black w-40 z-50">
+                    <a href="/word/kanji">
+                        <li class="px-4 py-2 hover:bg-gray-200">한자</li>
+                    </a>
+                    <!-- <a href="/word/japanese">
+                        <li class="px-4 py-2 hover:bg-gray-200">일본어</li>
+                    </a>
+                    <a href="/word/japanese_paragraph">
+                        <li class="px-4 py-2 hover:bg-gray-200">일본어(문장)</li>
+                    </a> -->
+                    <a href="/word/english">
+                        <li class="px-4 py-2 hover:bg-gray-200">영어(어원)</li>
+                    </a>
+                    <!-- <a href="/word/english_easy1">
+                        <li class="px-4 py-2 hover:bg-gray-200">영어(v1)</li>
+                    </a>
+                    <a href="/word/english_easy2">
+                        <li class="px-4 py-2 hover:bg-gray-200">영어(v2)</li>
+                    </a> -->
+                </ul>
+            </li>
+            <li class="relative group p-2">
+                <a href="#" class="hover:underline">암기장</a>
+                <ul class="absolute left-0 top-full hidden group-hover:block bg-white text-black w-40 z-50">
+                    <a href="/word/kanji/saved">
+                        <li class="px-4 py-2 hover:bg-gray-200">한자</li>
+                    </a>
+                    <!-- <a href="/word/japanese/saved">
+                        <li class="px-4 py-2 hover:bg-gray-200">일본어</li>
+                    </a>
+                    <a href="/word/japanese_paragraph/saved">
+                        <li class="px-4 py-2 hover:bg-gray-200">일본어(문장)</li>
+                    </a> -->
+                    <a href="/word/english/saved">
+                        <li class="px-4 py-2 hover:bg-gray-200">영어(어원)</li>
+                    </a>
+                    <!-- <a href="/word/english_easy1/saved">
+                        <li class="px-4 py-2 hover:bg-gray-200">영어(v1)</li>
+                    </a>
+                    <a href="/word/english_easy2/saved">
+                        <li class="px-4 py-2 hover:bg-gray-200">영어(v2)</li>
+                    </a> -->
+                </ul>
+            </li>
+        </ul>
 
         <!-- 로그인/로그아웃 버튼 -->
-        <div id="authButtons">
+        <div class="authButtons hidden sm:flex">
+            <!-- 버튼이 여기에 동적으로 추가된다 -->
+        </div>
+
+        <!-- 모바일 햄버거 메뉴 버튼 -->
+        <button id="menuButton" class="sm:hidden focus:outline-none">
+            <!-- 햄버거 아이콘 -->
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                </path>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- 모바일 사이드 메뉴 -->
+    <div id="mobileMenu"
+        class="noto-sans-kr fixed top-0 right-0 h-full w-64 bg-green-500 text-white transform translate-x-full transition-transform duration-300 z-50">
+        <button id="closeButton" class="absolute top-4 right-4 focus:outline-none">
+            <!-- 닫기 아이콘 -->
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <ul class="mt-16 space-y-6 px-6">
+            <li class="relative group"><span class="select-none">단어</span>
+                <ul class="mt-2 ml-4 space-y-2">
+                    <a href="/word/kanji" class="block hover:opacity-30">
+                        <li>한자</li>
+                    </a>
+                    <!-- <a href="/word/japanese" class="block hover:opacity-30">
+                        <li>일본어</li>
+                    </a>
+                    <a href="/word/japanese_paragraph" class="block hover:opacity-30">
+                        <li>일본어(문장)</li>
+                    </a> -->
+                    <a href="/word/english" class="block hover:opacity-30">
+                        <li>영어(어원)</li>
+                    </a>
+                    <!-- <a href="/word/english_easy1" class="block hover:opacity-30">
+                        <li>영어(v1)</li>
+                    </a>
+                    <a href="/word/english_easy2" class="block hover:opacity-30">
+                        <li>영어(v2)</li>
+                    </a> -->
+                </ul>
+            </li>
+            <li class="relative group"><span class="select-none">암기장</span>
+                <ul class="mt-2 ml-4 space-y-2">
+                    <a href="/word/kanji/saved" class="block hover:opacity-30">
+                        <li>한자</li>
+                    </a>
+                    <!-- <a href="/word/japanese/saved" class="block hover:opacity-30">
+                        <li>일본어</li>
+                    </a>
+                    <a href="/word/japanese_paragraph/saved" class="block hover:opacity-30">
+                        <li>일본어(문장)</li>
+                    </a> -->
+                    <a href="/word/english/saved" class="block hover:opacity-30">
+                        <li>영어(어원)</li>
+                    </a>
+                    <!-- <a href="/word/english_easy1/saved" class="block hover:opacity-30">
+                        <li>영어(v1)</li>
+                    </a>
+                    <a href="/word/english_easy2/saved" class="block hover:opacity-30">
+                        <li>영어(v2)</li>
+                    </a> -->
+                </ul>
+            </li>
+        </ul>
+        <!-- 로그인/로그아웃 버튼 -->
+        <div class="authButtons absolute bottom-4 right-4">
             <!-- 버튼이 여기에 동적으로 추가된다 -->
         </div>
     </div>
 
-    
+    <!-- 자바스크립트 -->
     <script th:src="@{/js/nav.js}"></script>
-</nav>
+</div>
