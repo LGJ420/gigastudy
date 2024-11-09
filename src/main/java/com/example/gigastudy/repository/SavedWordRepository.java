@@ -24,4 +24,7 @@ public interface SavedWordRepository extends JpaRepository<SavedWord, Long>{
 
     @Query("SELECT COALESCE(MAX(sw.seq), 0) FROM SavedWord sw WHERE sw.user = :user AND sw.word.type = :type")
     Long findMaxSeqByUserAndWordType(@Param("user") User user, @Param("type") WordType type);
+
+    @Query("SELECT COUNT(sw) FROM SavedWord sw WHERE sw.user = :user AND sw.word.type = :type AND sw.seq < (SELECT s.seq FROM SavedWord s WHERE s.user = :user AND s.word = :word)")
+    Optional<Long> findPositionByUserAndTypeAndWord(@Param("user") User user, @Param("type") WordType type, @Param("word") Word word);    
 }

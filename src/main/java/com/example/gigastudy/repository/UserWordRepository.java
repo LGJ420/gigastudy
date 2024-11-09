@@ -16,4 +16,7 @@ public interface UserWordRepository extends JpaRepository<UserWord, Long>{
 
     @Query("SELECT uw FROM UserWord uw WHERE uw.user = :user AND uw.word.type = :type ORDER BY uw.seq")
     List<UserWord> findByUserAndWordType(@Param("user") User user, @Param("type") WordType type);
+
+    @Query("SELECT COUNT(uw) FROM UserWord uw WHERE uw.user = :user AND uw.word.type = :type AND uw.seq < (SELECT s.seq FROM UserWord s WHERE s.user = :user AND s.word = :word)")
+    Optional<Long> findPositionByUserAndTypeAndWord(@Param("user") User user, @Param("type") WordType type, @Param("word") Word word);    
 }

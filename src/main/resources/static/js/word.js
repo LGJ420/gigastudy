@@ -150,6 +150,10 @@ function updateLoadingBar(percent) {
 
 // 인덱스 저장
 async function saveCurrentIndex() {
+
+    // 단어의 id값을 인덱스로 사용한다.
+    const wordId = words[currentIndex].wordDTO.id;
+
     try {
         // JWT 토큰 가져오기
         const accessToken = localStorage.getItem('accessToken');
@@ -163,7 +167,7 @@ async function saveCurrentIndex() {
             body: JSON.stringify({
                 flag: getFlag,
                 type: getType,
-                saveIndex: currentIndex
+                saveIndex: wordId
             })
         });
         console.log('인덱스가 저장되었습니다.');
