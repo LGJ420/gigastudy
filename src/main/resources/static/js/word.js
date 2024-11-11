@@ -416,6 +416,7 @@ function handleClickFirst(){
 
     currentIndex = 0;
     displayWord();
+    saveCurrentIndex();
 }
 
 
