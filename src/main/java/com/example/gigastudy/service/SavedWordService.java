@@ -69,6 +69,8 @@ public class SavedWordService {
             savedWordRepository.save(savedWord);
         });
 
+        Long firstWordId = savedWords.isEmpty() ? 0L : savedWords.get(0).getWord().getId();
+
         // 인덱스 초기화
         UserIndex userIndex = userIndexRepository.findByUserAndFlagAndType(user, true, wordType)
                 .orElseGet(() -> UserIndex.builder()
@@ -78,7 +80,7 @@ public class SavedWordService {
                         .saveIndex(0L)
                         .build());
 
-        userIndex.changeIndex(0L);
+        userIndex.changeIndex(firstWordId);
         userIndexRepository.save(userIndex);
     }
 
