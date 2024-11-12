@@ -89,16 +89,16 @@ async function init(flag, type) {
         // 애니메이션 중이면 단축키 동작 안함
         if (isAnimating) return;
 
-        if (event.code === 'ArrowRight' || event.code === 'Enter') {
+        if (event.code === 'ArrowRight' || event.code === 'Enter' || event.code === 'KeyD') {
             handleClickNext();
         }
-        else if (event.code === 'ArrowLeft' || event.code === 'Backspace') {
+        else if (event.code === 'ArrowLeft' || event.code === 'Backspace' || event.code === 'KeyA') {
             handleClickPre();
         }
-        else if (event.code === 'ArrowUp' || event.code === 'Quote') {
+        else if (event.code === 'ArrowUp' || event.code === 'Quote' || event.code === 'KeyW') {
             handleClickSave();
         }
-        else if (event.code === 'ArrowDown' || event.code === 'Backslash') {
+        else if (event.code === 'ArrowDown' || event.code === 'Backslash' || event.code === 'KeyS') {
             handleClickDelete();
         }
     });
