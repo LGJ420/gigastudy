@@ -15,7 +15,7 @@ public class WordPageController {
         model.addAttribute("contentTemplate", "");
         model.addAttribute("cssFile", "");
         model.addAttribute("jsFile", "");
-        return "word/wordLayout";
+        return "word/wordNormalTurnLayout";
     }
 
     @GetMapping("/kanji")
@@ -24,7 +24,7 @@ public class WordPageController {
         model.addAttribute("contentTemplate", "word/kanji");
         model.addAttribute("cssFile", "word.css");
         model.addAttribute("jsFile", "kanji.js");
-        return "word/wordLayout";
+        return "word/wordNormalTurnLayout";
     }
 
     @GetMapping("/english")
@@ -33,7 +33,7 @@ public class WordPageController {
         model.addAttribute("contentTemplate", "word/english");
         model.addAttribute("cssFile", "word.css");
         model.addAttribute("jsFile", "english.js");
-        return "word/wordLayout";
+        return "word/wordNormalTurnLayout";
     }
 
     @GetMapping("/kanji/saved")
@@ -42,7 +42,7 @@ public class WordPageController {
         model.addAttribute("contentTemplate", "word/kanjiSaved");
         model.addAttribute("cssFile", "word.css");
         model.addAttribute("jsFile", "kanjiSaved.js");
-        return "word/wordLayout";
+        return "word/wordNormalTurnLayout";
     }
 
     @GetMapping("/english/saved")
@@ -51,7 +51,7 @@ public class WordPageController {
         model.addAttribute("contentTemplate", "word/englishSaved");
         model.addAttribute("cssFile", "word.css");
         model.addAttribute("jsFile", "englishSaved.js");
-        return "word/wordLayout";
+        return "word/wordNormalTurnLayout";
     }
 
 
