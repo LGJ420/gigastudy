@@ -13,20 +13,22 @@
             </div>
         </div>
     </div>
-    <div class="noto-sans-kr flex items-center justify-center h-10 py-8 sm:py-10">
-        <button class="bg-[#f9f9f9] border rounded-md text-sm py-1 px-2 mx-1 sm:text-lg sm:py-2 sm:px-3 sm:mx-3 select-none hover:opacity-30"
-            onclick="handleClickPre()">이전</button>
-        <button class="bg-[#f9f9f9] border rounded-md text-sm py-1 px-2 mx-1 sm:text-lg sm:py-2 sm:px-3 sm:mx-3 select-none hover:opacity-30"
-            onclick="handleClickNext()">다음</button>
-        <button class="bg-[#f9f9f9] border rounded-md text-sm py-1 px-2 mx-1 sm:text-lg sm:py-2 sm:px-3 sm:mx-3 select-none hover:opacity-30"
-            onclick="handleClickSave()">저장</button>
-        <button class="bg-[#f9f9f9] border rounded-md text-sm py-1 px-2 mx-1 sm:text-lg sm:py-2 sm:px-3 sm:mx-3 select-none hover:opacity-30 hidden"
-            onclick="handleClickDelete()" id="deleteButton">삭제</button>
-        <button class="bg-[#f9f9f9] border rounded-md text-sm py-1 px-2 mx-1 sm:text-lg sm:py-2 sm:px-3 sm:mx-3 select-none hover:opacity-30"
-            onclick="showConfirm('지금까지 학습한 내용이 모두 초기화됩니다.<br>정말로 섞으시겠습니까?', handleClickShuffle, null)">섞기</button>
-        <button class="bg-[#f9f9f9] border rounded-md text-sm py-1 px-2 mx-1 sm:text-lg sm:py-2 sm:px-3 sm:mx-3 select-none hover:opacity-30"
-            onclick="showConfirm('정말 첫 단어로 돌아가시겠습니까?', handleClickFirst, null)">처음</button>
-    </div>
+    <div class="flex items-center justify-center">
+        <div class="noto-sans-kr flex items-center justify-center h-10 py-8 w-[30rem]">
+            <button class="bg-[#f9f9f9] border rounded-md flex-1 text-sm sm:text-base py-2 px-2 mr-1 select-none hover:opacity-30"
+                onclick="handleClickPre()">이전</button>
+            <button class="bg-[#f9f9f9] border rounded-md flex-1 text-sm sm:text-base py-2 px-2 mx-1 select-none hover:opacity-30"
+                onclick="handleClickNext()">다음</button>
+            <button class="bg-[#f9f9f9] border rounded-md flex-1 text-sm sm:text-base py-2 px-2 mx-1 select-none hover:opacity-30"
+                onclick="handleClickSave()">저장</button>
+            <button class="bg-[#f9f9f9] border rounded-md flex-1 text-sm sm:text-base py-2 px-2 mx-1 select-none hover:opacity-30 hidden"
+                onclick="handleClickDelete()" id="deleteButton">삭제</button>
+            <button class="bg-[#f9f9f9] border rounded-md flex-1 text-sm sm:text-base py-2 px-2 mx-1 select-none hover:opacity-30"
+                onclick="showConfirm('지금까지 학습한 내용이 모두 초기화됩니다.<br>정말로 섞으시겠습니까?', handleClickShuffle, null)">섞기</button>
+            <button class="bg-[#f9f9f9] border rounded-md flex-1 text-sm sm:text-base py-2 px-2 ml-1 select-none hover:opacity-30"
+                onclick="showConfirm('정말 첫 단어로 돌아가시겠습니까?', handleClickFirst, null)">처음</button>
+        </div>
+    </div>    
 
     <div th:replace="~{loading :: loading}"></div>
     
