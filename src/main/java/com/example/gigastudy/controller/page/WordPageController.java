@@ -9,15 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/word")
 public class WordPageController {
     
-    @GetMapping("")
-    public String mainPage(Model model) {
-
-        model.addAttribute("contentTemplate", "");
-        model.addAttribute("cssFile", "");
-        model.addAttribute("jsFile", "");
-        return "word/wordNormalTurnLayout";
-    }
-
     @GetMapping("/kanji")
     public String kanjiPage(Model model) {
 
@@ -30,9 +21,9 @@ public class WordPageController {
     @GetMapping("/english")
     public String englishPage(Model model) {
 
-        model.addAttribute("contentTemplate", "word/english");
+        model.addAttribute("contentTemplate", "word/englishOrigin");
         model.addAttribute("cssFile", "word.css");
-        model.addAttribute("jsFile", "english.js");
+        model.addAttribute("jsFile", "englishOrigin.js");
         return "word/wordNormalTurnLayout";
     }
 
@@ -48,13 +39,9 @@ public class WordPageController {
     @GetMapping("/english/saved")
     public String EnglishSavedPage(Model model) {
 
-        model.addAttribute("contentTemplate", "word/englishSaved");
+        model.addAttribute("contentTemplate", "word/englishOriginSaved");
         model.addAttribute("cssFile", "word.css");
-        model.addAttribute("jsFile", "englishSaved.js");
+        model.addAttribute("jsFile", "englishOriginSaved.js");
         return "word/wordNormalTurnLayout";
     }
-
-
-
-
 }
