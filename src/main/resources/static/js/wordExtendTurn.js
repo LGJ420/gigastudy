@@ -238,39 +238,46 @@ function handleClickNext() {
 
     if (currentIndex < words.length) {
         if (turning) {
-            // 카드가 이미 뒤집혀 있을 경우, 날려버림
             isAnimating = true;
 
             // 카드 날아가는 애니메이션 추가
             card.classList.add('fly-off');
 
+            // 애니메이션동안 다음 카드의 내용 잠시 비우기
+            const wordDiv = document.getElementById(`${currentCard}Front`);
+            const meaningDiv = document.getElementById(`${currentCard}Back`);
+            wordDiv.textContent = " ";
+            meaningDiv.textContent = " ";
+
+
             card.addEventListener('animationend', () => {
-                // 애니메이션 종료 후 처리
+
+                // 애니메이션 종료 후 초기화
                 card.classList.add('hidden');
+                card.classList.add('opacity-0');
                 card.classList.remove('fly-off');
                 card.classList.remove('flipped');
-                card.classList.add('opacity-0');
 
                 // 카드 위치 초기화
-                setTimeout(() => {
-                    card.classList.remove('opacity-0');
-                }, 0);
+                card.classList.remove('opacity-0');
 
-                // 다음 카드 준비
-                currentIndex++;
-                turning = false;
-                isAnimating = false;
+                setTimeout(()=>{
+                    // 다음 카드 준비
+                    currentIndex++;
+                    
+                    // currentCard와 nextCard 교체
+                    [currentCard, nextCard] = [nextCard, currentCard];
 
-                // currentCard와 nextCard 교체
-                [currentCard, nextCard] = [nextCard, currentCard];
-
-                // 다음 카드 내용 준비
-                displayWord();
+                    displayWord();
+                    isAnimating = false;
+                    turning = false;
+                }, 200);
 
                 // 현재 인덱스 저장
                 saveCurrentIndex();
 
             }, { once: true });
+            
         } else {
             // 카드 뒤집기
             isAnimating = true;
