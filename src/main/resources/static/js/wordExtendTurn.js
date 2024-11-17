@@ -190,8 +190,10 @@ function displayWord() {
     cardCounting();
 
     if (currentIndex < words.length && currentIndex >= 0) {
-        const word = words[currentIndex].wordDTO.word;
+        const getWord = words[currentIndex].wordDTO.word;
+        const word = cleanWord(getWord);
         const meaning = words[currentIndex].wordDTO.mean1;
+        
 
         // 글자 길이에 따라 폰트 크기 조정
         if (word.length > 10) {
@@ -277,7 +279,7 @@ function handleClickNext() {
                 saveCurrentIndex();
 
             }, { once: true });
-            
+
         } else {
             // 카드 뒤집기
             isAnimating = true;
@@ -429,4 +431,13 @@ function cardCounting(){
     } else {
         countDiv.textContent = `${currentIndex + 1} / ${words.length}`;
     }
+}
+
+
+// 문자 포맷
+function cleanWord(input) {
+
+    return input
+        .replace(/\|[^|]*\|/g, '') // `|` 로 둘러쌓인 단어 제거
+        .replace(/[·()]/g, '');   // `·`, `(`, `)` 제거
 }
