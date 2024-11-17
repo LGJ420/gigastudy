@@ -190,8 +190,7 @@ function displayWord() {
     cardCounting();
 
     if (currentIndex < words.length && currentIndex >= 0) {
-        const getWord = words[currentIndex].wordDTO.word;
-        const word = cleanWord(getWord);
+        const word = cleanEnglishWord(words[currentIndex].wordDTO.word);
         const meaning = words[currentIndex].wordDTO.mean1;
         
 
@@ -435,7 +434,7 @@ function cardCounting(){
 
 
 // 문자 포맷
-function cleanWord(input) {
+function cleanEnglishWord(input) {
 
     return input
         .replace(/\|[^|]*\|/g, '') // `|` 로 둘러쌓인 단어 제거

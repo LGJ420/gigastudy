@@ -185,9 +185,9 @@ function displayWord() {
     cardCounting();
 
     if (currentIndex < words.length && currentIndex >= 0) {
-        const pronounce = words[currentIndex].wordDTO.pronounce;
-        const word = cleanWord(words[currentIndex].wordDTO.word);
-        const meaning = words[currentIndex].wordDTO.mean1;
+        const pronounce = cleanJapanesePronounce(words[currentIndex].wordDTO.pronounce);
+        const word = words[currentIndex].wordDTO.word;
+        const meaning = cleanJapaneseMeaning(words[currentIndex].wordDTO.mean1);
         
 
         // 폰트 크기 조정
@@ -424,9 +424,16 @@ function cardCounting(){
 
 
 // 문자 포맷
-function cleanWord(input) {
+function cleanJapanesePronounce(input) {
 
     return input
-        .replace(/\|[^|]*\|/g, '') // `|` 로 둘러쌓인 단어 제거
-        .replace(/[·()]/g, '');   // `·`, `(`, `)` 제거
+        .replace(/p/g, '') // 영어 p 제거
+}
+
+
+function cleanJapaneseMeaning(input) {
+
+    return input
+        .replace(/\[.*?\]/, "") // 첫 대괄호 묶음만 제거
+        .replace(/;/g, ','); // ; -> , 변경
 }
