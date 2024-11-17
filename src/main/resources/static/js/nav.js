@@ -1,11 +1,28 @@
 const mobileMenu = document.getElementById('mobileMenu');
+const menuButton = document.getElementById('menuButton');
+const closeButton = document.getElementById('closeButton');
+const mobileMenuSupport = document.getElementById('mobileMenuSupport');
 
-menuButton.addEventListener('click', () => {
+function openMenu() {
     mobileMenu.classList.remove('translate-x-full');
+    mobileMenuSupport.classList.remove('hidden');
+}
+
+function closeMenu() {
+    mobileMenu.classList.add('translate-x-full');
+    mobileMenuSupport.classList.add('hidden');
+}
+
+menuButton.addEventListener('click', (event) => {
+    openMenu();
 });
 
-closeButton.addEventListener('click', () => {
-    mobileMenu.classList.add('translate-x-full');
+closeButton.addEventListener('click', (event) => {
+    closeMenu();
+});
+
+mobileMenuSupport.addEventListener('click', (event) => {
+    closeMenu();
 });
 
 
