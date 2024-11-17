@@ -219,6 +219,8 @@ function displayWord() {
             wordDiv.style.fontSize = '4rem';
         } else if (word.length > 2) {
             wordDiv.style.fontSize = '5rem';
+        } else if (word.length > 1) {
+            wordDiv.style.fontSize = '7rem';
         } else {
             wordDiv.style.fontSize = '10rem';
         }
