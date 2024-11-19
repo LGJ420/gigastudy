@@ -49,6 +49,7 @@ public class UserWordService {
                         .pronounce(userWord.getWord().getPronounce())
                         .importance(userWord.getWord().getImportance())
                         .description(userWord.getWord().getDescription())
+                        .subcategory(userWord.getWord().getSubcategory())
                         .type(userWord.getWord().getType())
                         .part(userWord.getWord().getPart())
                         .eword1(userWord.getWord().getEword1())

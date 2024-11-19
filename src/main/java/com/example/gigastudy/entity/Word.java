@@ -32,6 +32,7 @@ public class Word {
     private String pronounce;
     private Long importance;
     private String description;
+    private String subcategory;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

@@ -20,6 +20,7 @@ public class WordDTO {
     private String pronounce;
     private Long importance;
     private String description;
+    private String subcategory;
 
     private WordType type;
     private WordPart part;
