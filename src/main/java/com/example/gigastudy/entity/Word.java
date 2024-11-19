@@ -12,7 +12,7 @@ import lombok.*;
 @Table(
     // 복합제약조건
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"word", "type", "part"})
+        @UniqueConstraint(columnNames = {"word", "type", "part", "subcategory"})
     }
 )
 public class Word {
