@@ -46,15 +46,26 @@ public class UserService {
         
 
         // 회원가입시 회원에게 모든 단어장 부여
-        List<Word> allWords = wordRepository.findAll();
+        List<Word> filteredWords = wordRepository.findAll();
         
+        // 회원가입시 회원에게 특정 타입 단어들만 부여 (현재 보류중)
+        // List<Word> filteredWords = wordRepository
+        //     .findByTypeIn(Arrays.asList(
+        //         "KANJI",
+        //         "JAPANESE",
+        //         "ENGLISH",
+        //         "ENGLISH_ORIGIN",
+        //         "ENGLISH_EASY1",
+        //         "ENGLISH_EASY2"));
+
+    
         // 회원에게 단어 부여하기전 단어 섞기
-        Collections.shuffle(allWords);
+        Collections.shuffle(filteredWords);
 
         // 시퀀스 할당하기
         AtomicLong seq = new AtomicLong(1);
 
-        allWords.forEach(word -> {
+        filteredWords.forEach(word -> {
             UserWord userWord = UserWord.builder()
                 .user(user)
                 .word(word)
