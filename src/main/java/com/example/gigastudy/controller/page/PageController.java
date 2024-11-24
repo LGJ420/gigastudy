@@ -26,9 +26,9 @@ public class PageController {
     @GetMapping("test2")
     public String test2Page(Model model) {
 
-        model.addAttribute("contentTemplate", "word/japanese");
+        model.addAttribute("contentTemplate", "word/japanese1");
         model.addAttribute("cssFile", "wordTwoCard.css");
-        model.addAttribute("jsFile", "japanese.js");
+        model.addAttribute("jsFile", "japanese1.js");
         
         return "word/wordSimplePassLayout";
     }
