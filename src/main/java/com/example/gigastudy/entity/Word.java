@@ -50,4 +50,6 @@ public class Word {
     private String emean3;
     private String eword4;
     private String emean4;
+    private String eword5;
+    private String emean5;
 }
