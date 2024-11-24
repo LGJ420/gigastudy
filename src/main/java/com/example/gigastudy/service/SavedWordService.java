@@ -61,6 +61,8 @@ public class SavedWordService {
                                 .emean3(userWord.getWord().getEmean3())
                                 .eword4(userWord.getWord().getEword4())
                                 .emean4(userWord.getWord().getEmean4())
+                                .eword5(userWord.getWord().getEword5())
+                                .emean5(userWord.getWord().getEmean5())
                                 .build())
                         .seq(userWord.getSeq())
                         .build())
