@@ -31,6 +31,8 @@ public class Word {
 
     private String pronounce;
     private Long importance;
+
+    @Column(length = 2000)
     private String description;
     private String subcategory;
 
