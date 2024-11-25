@@ -160,6 +160,10 @@ function displayWord() {
     const cardFrontSecond = document.getElementById(`${currentCard}FrontSecond`);
     const cardFrontThird = document.getElementById(`${currentCard}FrontThird`);
 
+    // First, Third 숨기기
+    cardFrontFirst.classList.add('opacity-0');
+    cardFrontThird.classList.add('opacity-0');
+
     // 다음 카드 숨기기
     const nextCardElement = document.getElementById(nextCard);
     nextCardElement.classList.add('hidden');
@@ -271,9 +275,13 @@ function handleClickNext() {
             }, { once: true });
 
         } else {
-            // 카드 뒤집기
             isAnimating = true;
+            
+            // First, Third 보이기
+            cardFrontFirst.classList.remove('opacity-0');
+            cardFrontThird.classList.remove('opacity-0');
             extending = true;
+
             isAnimating = false;
         }
     }
@@ -284,12 +292,15 @@ function handleClickPre() {
 
     if (isAnimating) return;
 
-    const card = document.getElementById(currentCard);
+    const cardFrontFirst = document.getElementById(`${currentCard}FrontFirst`);
+    const cardFrontThird = document.getElementById(`${currentCard}FrontThird`);
 
+    // 맨처음 카드인 동시에 First, Third까지 보일경우
     if (currentIndex === 0 && extending) {
-        // 첫 번째 카드에서 뒤집혀 있을 경우, 뒤집기 취소
+        // First, Third 다시 가리기
         isAnimating = true;
-        card.classList.remove('flipped');
+        cardFrontFirst.classList.add('opacity-0');
+        cardFrontThird.classList.add('opacity-0');
         extending = false;
         isAnimating = false;
         return;
@@ -297,9 +308,10 @@ function handleClickPre() {
 
     if (currentIndex > 0) {
         if (extending) {
-            // 카드 뒤집기 취소
+            // First, Third 다시 가리기
             isAnimating = true;
-            card.classList.remove('flipped');
+            cardFrontFirst.classList.add('opacity-0');
+            cardFrontThird.classList.add('opacity-0');
             extending = false;
             isAnimating = false;
         } else {

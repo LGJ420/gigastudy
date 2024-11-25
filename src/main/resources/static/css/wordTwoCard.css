@@ -64,6 +64,13 @@
     transform: translateY(60%);
 }
 
+#card1FrontFirst,
+#card2FrontFirst,
+#card1FrontThird,
+#card2FrontThird {
+    transition: opacity 0.5s ease;
+}
+
 .back {
     transform: rotateY(-180deg);
 }
