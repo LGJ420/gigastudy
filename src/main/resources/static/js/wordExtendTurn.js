@@ -2,6 +2,7 @@ let getFlag, getType;
 let currentIndex = 0;
 let words = [];
 let turning = false;
+let extending = false;
 let isAnimating = false;
 let currentCard = 'card1';
 let nextCard = 'card2';
@@ -156,8 +157,8 @@ function displayWord() {
 
     // 현재 카드 요소 가져오기
     const card = document.getElementById(currentCard);
-    const wordDiv = document.getElementById(`${currentCard}Front`);
-    const meaningDiv = document.getElementById(`${currentCard}Back`);
+    const cardFrontSecond = document.getElementById(`${currentCard}FrontSecond`);
+    const backDiv = document.getElementById(`${currentCard}Back`);
 
     // 현재 카드 보이기 및 z-index 설정
     card.classList.remove('hidden');
@@ -177,11 +178,11 @@ function displayWord() {
 
     // 로그인 상태 확인
     if (!accessToken) {
-        wordDiv.style.fontSize = '2rem';
-        meaningDiv.style.fontSize = '2rem';
+        cardFrontSecond.style.fontSize = '2rem';
+        backDiv.style.fontSize = '2rem';
         
-        wordDiv.textContent = "로그인이 필요한 서비스입니다.";
-        meaningDiv.textContent = "로그인이 필요한 서비스입니다.";
+        cardFrontSecond.textContent = "로그인이 필요한 서비스입니다.";
+        backDiv.textContent = "로그인이 필요한 서비스입니다.";
 
         return;
     }
@@ -189,44 +190,148 @@ function displayWord() {
     // 카드 카운팅 업데이트
     cardCounting();
 
+
+
+    // mean들 준비하기
+    const means = [];
+
+    for (let i = 1; i <= 3; i++) {
+        const meanField = `mean${i}`;
+
+        const mean = words[currentIndex].wordDTO[meanField];
+
+        // 둘다 존재할때만 배열에 넣기
+        if (mean) {
+            means.push(mean);
+        } else {
+            break; // 필드가 없으면 반복 종료
+        }
+    }
+
+    // eword와 emean들 준비하기
+    const ewords = [];
+    const emeans = [];
+
+    for (let i = 1; i <= 5; i++) {
+        const ewordField = `eword${i}`;
+        const emeanField = `emean${i}`;
+
+        const eword = words[currentIndex].wordDTO[ewordField];
+        const emean = words[currentIndex].wordDTO[emeanField];
+
+        // 둘다 존재할때만 배열에 넣기
+        if (eword && emean) {
+            ewords.push(eword);
+            emeans.push(emean);
+        } else {
+            break; // 필드가 없으면 반복 종료
+        }
+    }
+
+
     if (currentIndex < words.length && currentIndex >= 0) {
+
+        // 초기화
+        cardFrontSecond.innerHTML = '';
+        backDiv.innerHTML = '';
+
         const word = cleanEnglishWord(words[currentIndex].wordDTO.word);
         const meaning = words[currentIndex].wordDTO.mean1;
         
 
         // 글자 길이에 따라 폰트 크기 조정
         if (word.length > 10) {
-            wordDiv.style.fontSize = '2rem';
+            cardFrontSecond.style.fontSize = '2rem';
         } else if (word.length > 6) {
-            wordDiv.style.fontSize = '3rem';
+            cardFrontSecond.style.fontSize = '3rem';
         } else if (word.length > 4) {
-            wordDiv.style.fontSize = '4rem';
+            cardFrontSecond.style.fontSize = '4rem';
         } else if (word.length > 2) {
-            wordDiv.style.fontSize = '5rem';
+            cardFrontSecond.style.fontSize = '5rem';
         } else {
-            wordDiv.style.fontSize = '10rem';
+            cardFrontSecond.style.fontSize = '10rem';
         }
 
-        if (meaning.length > 10) {
-            meaningDiv.style.fontSize = '2rem';
-        } else if (meaning.length > 6) {
-            meaningDiv.style.fontSize = '3rem';
-        } else if (meaning.length > 4) {
-            meaningDiv.style.fontSize = '4rem';
-        } else {
-            meaningDiv.style.fontSize = '5rem';
+        // 앞카드에 단어 넣기
+        cardFrontSecond.textContent = word;
+
+
+        // 뒷카드에 요소(부수) 넣기
+        const backEwordEmeanContainer = document.createElement('div');
+        backEwordEmeanContainer.className = 'flex items-center justify-evenly';
+
+        for (let i = 0; i < ewords.length; i++) {
+
+            const epairDiv = document.createElement('div');
+            epairDiv.className = 'epair';
+
+            const ewordDiv = document.createElement('div');
+            ewordDiv.className = 'eword';
+            ewordDiv.textContent = ewords[i];
+            
+            const emeanDiv = document.createElement('div');
+            emeanDiv.className = 'emean';
+            emeanDiv.textContent = emeans[i];
+            
+            epairDiv.appendChild(ewordDiv);
+            epairDiv.appendChild(emeanDiv);
+
+            backEwordEmeanContainer.appendChild(epairDiv);
+        }
+        
+        backDiv.appendChild(backEwordEmeanContainer);
+
+
+        // 뒷카드에 뜻 넣기
+        for (let i = 0; i < means.length; i++) {
+
+            const backMeanDiv = document.createElement('div');
+            
+            backMeanDiv.className = 'backMean'
+            backMeanDiv.classList.add('pt-3');
+            backMeanDiv.textContent = means[i];
+            backDiv.appendChild(backMeanDiv);
         }
 
-        wordDiv.textContent = word;
-        meaningDiv.textContent = meaning;
+        
+        // 뒷카드 뜻이 여러개면 폰트 작게
+        if (means.length > 2) {
+            const backMeanDivs = backDiv.querySelectorAll('.backMean');
+
+            backMeanDivs.forEach(div => {
+                div.style.fontSize = '1.2rem';
+            });
+        }
+        else if(means.length > 1) {
+            const backMeanDivs = backDiv.querySelectorAll('.backMean');
+    
+            backMeanDivs.forEach(div => {
+                div.style.fontSize = '1.8rem';
+            });
+        }
+        else { // 뒷카드 뜻이 한개면 폰트 세분화
+            const backMeanDiv = backDiv.querySelector('.backMean');
+
+            if (means[0].length > 10) {
+                backMeanDiv.style.fontSize = '2rem';
+            } else if (means[0].length > 6) {
+                backMeanDiv.style.fontSize = '3rem';
+            } else if (means[0].length > 4) {
+                backMeanDiv.style.fontSize = '4rem';
+            } else {
+                backMeanDiv.style.fontSize = '5rem';
+            }
+        }
+
+
 
     } else {
         // 단어가 없을 때 폰트 크기 설정
-        wordDiv.style.fontSize = '2rem';
-        meaningDiv.style.fontSize = '2rem';
+        cardFrontSecond.style.fontSize = '2rem';
+        backDiv.style.fontSize = '2rem';
         
-        wordDiv.textContent = "더 이상 단어가 없습니다.";
-        meaningDiv.textContent = "더 이상 단어가 없습니다.";
+        cardFrontSecond.textContent = "더 이상 단어가 없습니다.";
+        backDiv.textContent = "더 이상 단어가 없습니다.";
     }
 }
 
@@ -245,10 +350,10 @@ function handleClickNext() {
             card.classList.add('fly-off');
 
             // 애니메이션동안 다음 카드의 내용 잠시 비우기
-            const wordDiv = document.getElementById(`${currentCard}Front`);
-            const meaningDiv = document.getElementById(`${currentCard}Back`);
-            wordDiv.textContent = " ";
-            meaningDiv.textContent = " ";
+            const cardFrontSecond = document.getElementById(`${currentCard}FrontSecond`);
+            const backDiv = document.getElementById(`${currentCard}Back`);
+            cardFrontSecond.textContent = " ";
+            backDiv.textContent = " ";
 
 
             card.addEventListener('animationend', () => {

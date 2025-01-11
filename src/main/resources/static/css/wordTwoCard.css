@@ -73,6 +73,19 @@
 
 .back {
     transform: rotateY(-180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.epair {
+    padding: 0rem 1rem;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .flipped {
