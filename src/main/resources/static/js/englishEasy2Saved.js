@@ -1,0 +1,1 @@
+window.onload = () => init(true, 'ENGLISH_EASY2');

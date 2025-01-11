@@ -1,0 +1,1 @@
+window.onload = () => init(null, 'JAPANESE2');
