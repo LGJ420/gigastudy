@@ -191,7 +191,6 @@ function displayWord() {
     cardCounting();
 
 
-
     // mean들 준비하기
     const means = [];
 
@@ -208,6 +207,7 @@ function displayWord() {
         }
     }
 
+    
     // eword와 emean들 준비하기
     const ewords = [];
     const emeans = [];
@@ -236,8 +236,7 @@ function displayWord() {
         backDiv.innerHTML = '';
 
         const word = cleanEnglishWord(words[currentIndex].wordDTO.word);
-        const meaning = words[currentIndex].wordDTO.mean1;
-        
+
 
         // 글자 길이에 따라 폰트 크기 조정
         if (word.length > 10) {
@@ -371,6 +370,9 @@ function handleClickNext() {
                     // 다음 카드 준비
                     currentIndex++;
                     
+                    // 인덱스 저장
+                    saveCurrentIndex();
+
                     // currentCard와 nextCard 교체
                     [currentCard, nextCard] = [nextCard, currentCard];
 
@@ -379,8 +381,6 @@ function handleClickNext() {
                     turning = false;
                 }, 200);
 
-                // 현재 인덱스 저장
-                saveCurrentIndex();
 
             }, { once: true });
 
@@ -420,6 +420,10 @@ function handleClickPre() {
         } else {
             // 이전 단어로 이동
             currentIndex--;
+
+            // 인덱스 저장
+            saveCurrentIndex();
+        
             turning = false;
             isAnimating = true;
 
@@ -431,8 +435,6 @@ function handleClickPre() {
 
             isAnimating = false;
 
-            // 현재 인덱스 저장
-            saveCurrentIndex();
         }
     }
 }
