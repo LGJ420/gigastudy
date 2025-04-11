@@ -35,4 +35,12 @@ public class WordDTO {
     private String emean4;
     private String eword5;
     private String emean5;
+
+    private String similar1;
+    private String similar2;
+    private String similar3;
+    private String similar4;
+    private String similar5;
+    private String similar6;
+    private String similar7;
 }
