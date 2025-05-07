@@ -53,6 +53,8 @@ public class SavedWordService {
                                 .subcategory(userWord.getWord().getSubcategory())
                                 .type(userWord.getWord().getType())
                                 .part(userWord.getWord().getPart())
+                                .exword(userWord.getWord().getExword())
+                                .exmean(userWord.getWord().getExmean())
                                 .eword1(userWord.getWord().getEword1())
                                 .emean1(userWord.getWord().getEmean1())
                                 .eword2(userWord.getWord().getEword2())

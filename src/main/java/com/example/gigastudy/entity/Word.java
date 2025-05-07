@@ -9,25 +9,28 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(
-    // 복합제약조건
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"word", "type", "part", "subcategory"})
-    }
-)
+// @Table(
+//     // 복합제약조건
+//     uniqueConstraints = {
+//         @UniqueConstraint(columnNames = {"word", "type", "part", "subcategory"})
+//     }
+// )
 public class Word {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    // @Column(nullable = false)
     private String word;
 
-    @Column(nullable = false)
+    // @Column(nullable = false)
     private String mean1;
     private String mean2;
     private String mean3;
+
+    private String exword;
+    private String exmean;
 
     private String pronounce;
     private Long importance;
@@ -36,11 +39,11 @@ public class Word {
     private String description;
     private String subcategory;
 
-    @Column(nullable = false)
+    // @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private WordType type;
 
-    @Column(nullable = false)
+    // @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private WordPart part;
 

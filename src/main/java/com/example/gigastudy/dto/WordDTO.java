@@ -22,6 +22,9 @@ public class WordDTO {
     private String description;
     private String subcategory;
 
+    private String exword;
+    private String exmean;
+
     private WordType type;
     private WordPart part;
 
